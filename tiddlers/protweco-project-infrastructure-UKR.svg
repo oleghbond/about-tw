@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Создано Microsoft Visio, экспорт SVG 2017-11-19 інфраструктура проекту.svg Page-2 -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
+		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="10.5995in" height="6.91847in"
+		viewBox="0 0 763.164 498.13" xml:space="preserve" color-interpolation-filters="sRGB" class="st14">
+	<v:documentProperties v:langID="1033" v:metric="true" v:viewMarkup="false">
+		<v:userDefs>
+			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
+		</v:userDefs>
+	</v:documentProperties>
+
+	<style type="text/css">
+	<![CDATA[
+		.st1 {fill:#fff2cc;stroke:#000000;stroke-dasharray:1.68,1.2;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st2 {fill:#ffffff;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.24}
+		.st3 {fill:#000000;font-family:Calibri;font-size:1.16666em}
+		.st4 {font-size:1em}
+		.st5 {fill:#31859b;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st6 {fill:#ffffff;font-family:Calibri;font-size:1.00001em;font-weight:bold}
+		.st7 {marker-start:url(#mrkr13-60);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.239976}
+		.st8 {fill:#000000;fill-opacity:1;stroke:#000000;stroke-opacity:1;stroke-width:0.086948582161584}
+		.st9 {stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.239976}
+		.st10 {marker-end:url(#mrkr13-69);stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.239976}
+		.st11 {stroke:#000000;stroke-dasharray:10.5,7.5;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5}
+		.st12 {fill:none;stroke:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:0.75}
+		.st13 {fill:#000000;font-family:Calibri;font-size:1.33333em;font-weight:bold}
+		.st14 {fill:none;fill-rule:evenodd;font-size:12px;overflow:visible;stroke-linecap:square;stroke-miterlimit:3}
+	]]>
+	</style>
+
+	<defs id="Markers">
+		<g id="lend13">
+			<path d="M 3 1 L 0 0 L 3 -1 L 3 1 " style="stroke:none"/>
+		</g>
+		<marker id="mrkr13-60" class="st8" v:arrowType="13" v:arrowSize="2" v:setback="33.003" refX="33.00300030003" orient="auto"
+				markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(11.501050105011) "/>
+		</marker>
+		<marker id="mrkr13-69" class="st8" v:arrowType="13" v:arrowSize="2" v:setback="34.5032" refX="-34.503150315032"
+				orient="auto" markerUnits="strokeWidth" overflow="visible">
+			<use xlink:href="#lend13" transform="scale(-11.501050105011,-11.501050105011) "/>
+		</marker>
+	</defs>
+	<g v:mID="4" v:index="2" v:groupContext="foregroundPage">
+		<title>Страница-2</title>
+		<v:pageProperties v:drawingScale="0.0393701" v:pageScale="0.0393701" v:drawingUnits="24" v:shadowOffsetX="8.50394"
+				v:shadowOffsetY="-8.50394"/>
+		<v:layer v:name="Соединительная линия" v:index="0"/>
+		<g id="shape38-1" v:mID="38" v:groupContext="shape" transform="translate(126.836,-272.901)">
+			<title>Скругленный прямоугольник</title>
+			<v:userDefs>
+				<v:ud v:nameU="CTypeTopLeftSnip" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="CTypeTopRightSnip" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="CTypeBotLeftSnip" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="CTypeBotRightSnip" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="CornerLockHoriz" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="CornerLockVert" v:prompt="" v:val="VT0(1):5"/>
+				<v:ud v:nameU="CornerLockDiag" v:prompt="" v:val="VT0(0):5"/>
+				<v:ud v:nameU="TopLeftOffset" v:prompt="" v:val="VT0(0.15748031496063):24"/>
+				<v:ud v:nameU="TopRightOffset" v:prompt="" v:val="VT0(0.15748031496063):24"/>
+				<v:ud v:nameU="BotLeftOffset" v:prompt="" v:val="VT0(0.15748031496063):24"/>
+				<v:ud v:nameU="BotRightOffset" v:prompt="" v:val="VT0(0.15748031496063):24"/>
+				<v:ud v:nameU="visVersion" v:prompt="" v:val="VT0(15):26"/>
+				<v:ud v:nameU="TopLeftOffset" v:prompt="" v:val="VT0(0.32620922384702):1"/>
+				<v:ud v:nameU="TopRightOffset" v:prompt="" v:val="VT0(0.32620922384702):1"/>
+				<v:ud v:nameU="BotLeftOffset" v:prompt="" v:val="VT0(0.32620922384702):1"/>
+				<v:ud v:nameU="BotRightOffset" v:prompt="" v:val="VT0(0.32620922384702):1"/>
+			</v:userDefs>
+			<path d="M23.49 498.13 L211.38 498.13 A23.4867 23.4867 -180 0 0 234.87 474.64 L234.87 392.12 A23.4867 23.4867 -180 0
+						 0 211.38 368.64 L23.49 368.64 A23.4867 23.4867 -180 0 0 -0 392.12 L0 474.64 A23.4867 23.4867 -180 0 0 23.49
+						 498.13 Z" class="st1"/>
+		</g>
+		<g id="shape1-3" v:mID="1" v:groupContext="shape" transform="translate(31.5031,-70.0773)">
+			<title>Прямоугольник</title>
+			<desc>Node.js</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="46.7717" cy="474.035" width="93.55" height="48.189"/>
+			<rect x="0" y="449.941" width="93.5433" height="48.189" class="st2"/>
+			<text x="25.22" y="478.24" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Node.js</text>		</g>
+		<g id="shape2-6" v:mID="2" v:groupContext="shape" transform="translate(45.6763,-118.266)">
+			<title>Прямоугольник.2</title>
+			<desc>TW5</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="31.1811" cy="481.122" width="62.37" height="34.0157"/>
+			<rect x="0" y="464.114" width="62.3622" height="34.0157" class="st2"/>
+			<text x="17.99" y="485.32" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>TW5</text>		</g>
+		<g id="shape3-9" v:mID="3" v:groupContext="shape" transform="translate(141.009,-200.441)">
+			<title>Прямоугольник.3</title>
+			<desc>Тека з файлами проекту</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="73.4807" cy="466.24" width="146.97" height="63.7795"/>
+			<rect x="0" y="434.35" width="146.961" height="63.7795" class="st2"/>
+			<text x="26.91" y="462.04" class="st3" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Тека з файлами <tspan
+						x="49.86" dy="1.2em" class="st4">проекту</tspan></text>		</g>
+		<g id="shape4-13" v:mID="4" v:groupContext="shape" transform="translate(150.71,-325.246)">
+			<title>Прямоугольник.4</title>
+			<desc>Локальний репозитарій проекту</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="63.7795" cy="466.24" width="127.56" height="63.7795"/>
+			<rect x="0" y="434.35" width="127.559" height="63.7795" class="st2"/>
+			<text x="31.04" y="453.64" class="st3" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Локальний <tspan
+						x="27.41" dy="1.2em" class="st4">репозитарій </tspan><tspan x="40.16" dy="1.2em" class="st4">проекту</tspan></text>		</g>
+		<g id="shape5-18" v:mID="5" v:groupContext="shape" transform="translate(255.812,-69.7434)">
+			<title>Прямоугольник.5</title>
+			<desc>Git</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="63.7795" cy="474.035" width="127.56" height="48.189"/>
+			<rect x="0" y="449.941" width="127.559" height="48.189" class="st2"/>
+			<text x="55.41" y="478.24" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Git</text>		</g>
+		<g id="shape6-21" v:mID="6" v:groupContext="shape" transform="translate(275.139,-117.932)">
+			<title>Прямоугольник.6</title>
+			<desc>TortoiseGit</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="42.5197" cy="481.122" width="85.04" height="34.0157"/>
+			<rect x="0" y="464.114" width="85.0394" height="34.0157" class="st2"/>
+			<text x="10.75" y="485.32" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>TortoiseGit</text>		</g>
+		<g id="shape7-24" v:mID="7" v:groupContext="shape" transform="translate(409.481,-325.246)">
+			<title>Прямоугольник.7</title>
+			<desc>Віддалений репозитарій проекту</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="92.5159" cy="466.24" width="185.04" height="63.7795"/>
+			<rect x="0" y="434.35" width="185.032" height="63.7795" class="st2"/>
+			<text x="19.62" y="462.04" class="st3" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Віддалений репозитарій <tspan
+						x="68.89" dy="1.2em" class="st4">проекту</tspan></text>		</g>
+		<g id="shape8-28" v:mID="8" v:groupContext="shape" transform="translate(409.481,-304.558)">
+			<title>Лист.8</title>
+			<desc>https://github.com/protw/eco.git</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="92.5159" cy="486.928" width="185.04" height="22.4037"/>
+			<rect x="0" y="475.726" width="185.032" height="22.4037" class="st5"/>
+			<text x="7.39" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>https://github.com/protw/eco.git</text>		</g>
+		<g id="shape9-31" v:mID="9" v:groupContext="shape" transform="translate(141.009,-177.627)">
+			<title>Лист.9</title>
+			<desc>D:\protw\5070-protw-eco</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="73.4807" cy="486.928" width="146.97" height="22.4037"/>
+			<rect x="0" y="475.726" width="146.961" height="22.4037" class="st5"/>
+			<text x="8.03" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>D:\protw\5070-protw-eco</text>		</g>
+		<g id="shape10-34" v:mID="10" v:groupContext="shape" transform="translate(262.899,-422.96)">
+			<title>Прямоугольник.10</title>
+			<desc>Браузер</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="46.7717" cy="474.035" width="93.55" height="48.189"/>
+			<rect x="0" y="449.941" width="93.5433" height="48.189" class="st2"/>
+			<text x="22.69" y="478.24" class="st3" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Браузер</text>		</g>
+		<g id="shape11-37" v:mID="11" v:groupContext="shape" transform="translate(18.375,-435.853)">
+			<title>Лист.11</title>
+			<desc>http://127.0.0.1:5070</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="58.4825" cy="486.928" width="116.97" height="22.4037"/>
+			<rect x="0" y="475.726" width="116.965" height="22.4037" class="st5"/>
+			<text x="4.2" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>http://127.0.0.1:5070</text>		</g>
+		<g id="shape12-40" v:mID="12" v:groupContext="shape" transform="translate(446.702,-68.3563)">
+			<title>Прямоугольник.12</title>
+			<desc>Github</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2954" cy="474.035" width="110.6" height="48.189"/>
+			<rect x="0" y="449.941" width="110.591" height="48.189" class="st2"/>
+			<text x="35.9" y="478.24" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Github</text>		</g>
+		<g id="shape13-43" v:mID="13" v:groupContext="shape" transform="translate(634.158,-422.96)">
+			<title>Прямоугольник.13</title>
+			<desc>Github Pages</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2954" cy="474.035" width="110.6" height="48.189"/>
+			<rect x="0" y="449.941" width="110.591" height="48.189" class="st2"/>
+			<text x="17.83" y="478.24" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Github Pages</text>		</g>
+		<g id="shape14-46" v:mID="14" v:groupContext="shape" transform="translate(634.198,-325.246)">
+			<title>Прямоугольник.14</title>
+			<desc>Travis-ci</desc>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2954" cy="466.24" width="110.6" height="63.7795"/>
+			<rect x="0" y="434.35" width="110.591" height="63.7795" class="st2"/>
+			<text x="31.88" y="470.44" class="st3" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Travis-ci</text>		</g>
+		<g id="shape15-49" v:mID="15" v:groupContext="shape" transform="translate(634.198,-305.702)">
+			<title>Лист.15</title>
+			<desc>.travis.yml</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="55.2954" cy="486.928" width="110.6" height="22.4037"/>
+			<rect x="0" y="475.726" width="110.591" height="22.4037" class="st5"/>
+			<text x="29.01" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>.travis.yml</text>		</g>
+		<g id="shape16-52" v:mID="16" v:groupContext="shape" transform="translate(408.465,-435.853)">
+			<title>Лист.16</title>
+			<desc>https://protw.github.io/eco/</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="83.1227" cy="486.928" width="166.25" height="22.4037"/>
+			<rect x="0" y="475.726" width="166.245" height="22.4037" class="st5"/>
+			<text x="10.31" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>https://protw.github.io/eco/</text>		</g>
+		<g id="shape17-55" v:mID="17" v:groupContext="shape" v:layerMember="0" transform="translate(69.7708,-435.853)">
+			<title>Динамическая соединительная линия</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M7.09 506.05 L7.09 506.41 L7.09 781.7" class="st7"/>
+		</g>
+		<g id="shape18-61" v:mID="18" v:groupContext="shape" v:layerMember="0" transform="translate(76.8575,-242.469)">
+			<title>Динамическая соединительная линия.18</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M0 502.16 L0 508.27 L64.15 508.27" class="st9"/>
+		</g>
+		<g id="shape19-64" v:mID="19" v:groupContext="shape" v:layerMember="0" transform="translate(135.34,-439.968)">
+			<title>Динамическая соединительная линия.19</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M0 491.04 L119.28 491.04" class="st10"/>
+		</g>
+		<g id="shape20-70" v:mID="20" v:groupContext="shape" v:layerMember="0" transform="translate(207.403,-264.22)">
+			<title>Динамическая соединительная линия.20</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M7.09 498.13 L7.09 445.38" class="st10"/>
+		</g>
+		<g id="shape21-75" v:mID="21" v:groupContext="shape" v:layerMember="0" transform="translate(409.481,-350.049)">
+			<title>Динамическая соединительная линия.21</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M-7.92 491.04 L-8.28 491.04 L-131.21 491.04" class="st7"/>
+		</g>
+		<g id="shape27-80" v:mID="27" v:groupContext="shape" v:layerMember="0" transform="translate(287.971,-232.331)">
+			<title>Боковая - боковая фиксированная 2</title>
+			<v:userDefs>
+				<v:ud v:nameU="TextPos" v:val="VT0(1):26"/>
+				<v:ud v:nameU="Offset" v:val="VT0(0.19685039370079):24"/>
+				<v:ud v:nameU="Scale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="AntiScale" v:val="VT0(1):26"/>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M7.92 498.13 L8.28 498.13 L14.17 498.13 L14.17 393.44 L121.51 393.44" class="st7"/>
+		</g>
+		<g id="shape28-85" v:mID="28" v:groupContext="shape" transform="translate(282.301,-286.27)">
+			<title>Лист.28</title>
+			<desc>Pull</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="18.6453" cy="486.928" width="37.3" height="22.4037"/>
+			<rect x="0" y="475.726" width="37.2906" height="22.4037" class="st5"/>
+			<text x="9.28" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Pull</text>		</g>
+		<g id="shape29-88" v:mID="29" v:groupContext="shape" transform="translate(298.439,-345.934)">
+			<title>Лист.29</title>
+			<desc>Push</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="17.1093" cy="486.928" width="34.22" height="22.4037"/>
+			<rect x="0" y="475.726" width="34.2186" height="22.4037" class="st5"/>
+			<text x="5.08" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Push</text>		</g>
+		<g id="shape30-91" v:mID="30" v:groupContext="shape" transform="translate(194.047,-286.27)">
+			<title>Лист.30</title>
+			<desc>Commit</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="24.6944" cy="486.928" width="49.39" height="22.4037"/>
+			<rect x="0" y="475.726" width="49.3888" height="22.4037" class="st5"/>
+			<text x="4.98" y="490.53" class="st6" v:langID="1033"><v:paragraph v:horizAlign="1"/><v:tabList/>Commit</text>		</g>
+		<g id="shape33-94" v:mID="33" v:groupContext="shape" v:layerMember="0" transform="translate(634.158,-439.968)">
+			<title>Динамическая соединительная линия.33</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M0 491.04 L-51.17 491.04" class="st10"/>
+		</g>
+		<g id="shape34-99" v:mID="34" v:groupContext="shape" v:layerMember="0" transform="translate(356.442,-439.968)">
+			<title>Динамическая соединительная линия.34</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M7.92 491.04 L8.28 491.04 L52.02 491.04" class="st7"/>
+		</g>
+		<g id="shape35-104" v:mID="35" v:groupContext="shape" v:layerMember="0" transform="translate(494.91,-116.545)">
+			<title>Динамическая соединительная линия.35</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M7.09 498.13 L7.09 310.12" class="st9"/>
+		</g>
+		<g id="shape36-107" v:mID="36" v:groupContext="shape" v:layerMember="0" transform="translate(594.513,-350.049)">
+			<title>Динамическая соединительная линия.36</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M0 491.04 L31.41 491.04" class="st10"/>
+		</g>
+		<g id="shape37-112" v:mID="37" v:groupContext="shape" v:layerMember="0" transform="translate(696.56,-389.026)">
+			<title>Динамическая соединительная линия.37</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M-7.07 498.13 L-7.07 487.5 L-7.11 487.5 L-7.11 472.47" class="st10"/>
+		</g>
+		<g id="shape40-117" v:mID="40" v:groupContext="shape" v:layerMember="0" transform="translate(310.689,-151.948)">
+			<title>Динамическая соединительная линия.40</title>
+			<v:userDefs>
+				<v:ud v:nameU="visVersion" v:val="VT0(15):26"/>
+			</v:userDefs>
+			<path d="M6.97 498.13 L7.19 385.46" class="st10"/>
+		</g>
+		<g id="shape41-122" v:mID="41" v:groupContext="shape" transform="translate(896.687,18.75) rotate(90)">
+			<title>Лист.41</title>
+			<path d="M0 498.13 L460.63 498.13" class="st11"/>
+		</g>
+		<g id="shape42-125" v:mID="42" v:groupContext="shape" transform="translate(206.206,-22.9232)">
+			<title>Лист.42</title>
+			<desc>Локальний комп’ютер</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="83.1227" cy="488.13" width="166.25" height="20"/>
+			<rect x="0" y="478.13" width="166.245" height="20" class="st12"/>
+			<text x="4.88" y="492.93" class="st13" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Локальний комп’ютер</text>		</g>
+		<g id="shape43-128" v:mID="43" v:groupContext="shape" transform="translate(406.548,-22.9232)">
+			<title>Лист.43</title>
+			<desc>Веб-середовище</desc>
+			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
+			<v:textRect cx="83.1227" cy="488.13" width="166.25" height="20"/>
+			<rect x="0" y="478.13" width="166.245" height="20" class="st12"/>
+			<text x="24.5" y="492.93" class="st13" v:langID="1058"><v:paragraph v:horizAlign="1"/><v:tabList/>Веб-середовище</text>		</g>
+	</g>
+</svg>

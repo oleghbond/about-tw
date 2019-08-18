@@ -1,0 +1,26 @@
+created: 20161227084130660
+headingorder: 080
+modified: 20170102114108862
+tags: [[Налаштування та інструменти]]
+title: Google Аnalytics для ТВ
+type: text/vnd.tiddlywiki
+
+У разі потреби моніторити відвідуваність власних ТВ (але лише тих, що встановлені в інтернеті) варто звернутись до Google Аnalytics. Для встановлення Google Аnalytics на ТВ виконайте наступну інструкцію:
+
+# Якщо не маєте обліковки у Гуглі, то спочатку зареєструйтесь там.
+# Зайдіть до сайту Google Analytics: http://www.google.com/analytics/
+# Створіть обліковку для одного або групи сайтів наприклад `proTW обліковка`, введіть домен, що ви хочете відстежувати, наприклад: `protw.github.io`.
+# Отримайте на сайті Google Analytics код відстежування, що буде виглядати на кшталт `UA-89672979-1`.
+# Зайдіть до сайту protw.github.io або http://tiddlywiki.com, відкрийте закладку `More`/`System` і перетягніть посилання трьох наступних тідлерів до локальної копії вашого ТВ-сайту:
+#* $:/GoogleAnalyticsDomain
+#* $:/GoogleAnalyticsAccount
+#* $:/plugins/tiddlywiki/googleanalytics
+#> ''Примітка:'' Якщо ви читаєте цю статтю з js-версії ТВ, то можна перетягувати згадані посилання прямо звідси. Також зважайте, що оригінальний дистрибутив плагіна знаходиться за адресою [[тут|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]].
+# Відредагуйте вже на вашій локальній копії ТВ-сайту перші два тідлери, вставивши ім'я вашого домену і отриманий код відстежування.
+# Завантажте ваші оновлення на ваш сайт (у випадку використання ~GitHub Pages це буде сторінка - https://github.com/protw/protw.github.io).
+# Поверніться до сайту Google Analytics і упевніться, що сайт відстежується.
+
+!! Дивіться також:
+
+* [[Google Analytics to TW5 - Обговорення на форумі|https://groups.google.com/d/msg/tiddlywiki/krl1pEz8L9o/KOGb3eryq2AJ]]
+* [[Вихідний код плагіна|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/googleanalytics]]

@@ -1,0 +1,22 @@
+created: 20171115143243083
+headingorder: 120
+modified: 20171115174404617
+tags: [[Створення документів]]
+title: Створення тідлер-шоу
+type: text/vnd.tiddlywiki
+
+!!Установка
+
+Цей плагін розроблений [[Jed Carty|http://ooktech.com/jed/resume/]] і його можна скачати і переглянути його в дії з авторського [[сайту|http://ooktech.com/jed/ExampleWikis/WizardWizard/]].
+
+<div style="width:13%;float:right;text-align:center;">{{$:/core/images/options-button}}</div>
+Для установки плагіну зайдіть на авторському сайті на закладку `Plugins` на `Control Panel`. Знайдіть у списку встановлених плагінів `A plugin to help create setup wizards or slideshows` і перетягніть його до своєї Тідлівікі. Це вся установка.
+
+Після встановлення серед іншого до вашої вікі буде скопійовані два файли:
+
+* [[$:/plugins/inmysocks/WizardWizard/Wizard Macro]]
+* [[$:/plugins/inmysocks/WizardWizard/Wizard Setup]]
+
+Ці файли містять пояснення англійською мовою. У разі необхідності українізації цих текстів перетягніть ці два файли з цієї вікі до своєї.
+
+{{$:/plugins/inmysocks/WizardWizard/Wizard Macro}}

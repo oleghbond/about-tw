@@ -1,0 +1,9 @@
+created: 20171120065137774
+modified: 20180828200045705
+order: 09
+tags: [[Початок роботи]]
+title: Загальна схема інфраструктури проекту
+topic: Проект
+type: text/vnd.tiddlywiki
+
+<<image-center-caption "protweco-project-infrastructure-UKR.svg" 85%>>

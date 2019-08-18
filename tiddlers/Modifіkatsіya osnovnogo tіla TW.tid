@@ -1,0 +1,17 @@
+created: 20171212095522997
+modified: 20180828202754550
+order: 040
+tags: [[Налаштування вигляду. Теми]]
+title: Модифікація основного тіла TW
+type: text/vnd.tiddlywiki
+
+; Розширення ''Story River''
+: у `Control Panel / Appearance / Theme Tweaks` параметри `Story right`, `Story width`, `Tiddler width` збільшені на 200px, а `Sidebar width` зменшений на стільки ж
+; Приховано виведення дати тідлера під титулом (subtitle)
+: закоментовано вміст системного тідлера $:/core/ui/ViewTemplate/subtitle, інший варіант - у цьому ж системному тідлері видалити тег `$:/tags/SideBar`
+; Модифікувати формат дати тідлера під титулом (subtitle)
+: відкрити системний тідлер $:/language/Tiddler/DateFormat, там знаходиться текстовий рядок, що представляє формат виведення дати, за замовчанням це `DDth MMM YYYY at hh12:0mmam`, міняємо цей рядок на альтернативний, наприклад, `DD-MM-YYYY`
+; Перемикання тідлерів між двома мовами
+: вставлена кнопка перемикання в у правому верхньому куті тідлера `ViewToolbar` - $:/boa/swapbutton із зображенням $:/boa/img/swap.svg; процедура проведена за описом [[тут|https://tiddlywiki.com/#Page%20and%20tiddler%20layout%20customisation]] та [[тут|http://tw5custom.tiddlyspot.com/#Buttons]]; назва тідлера іншою мовою зберігається у полі `crossref`; потрібна таке дороблення: у разі відсутності тідлера на перемикання він створюється
+
+

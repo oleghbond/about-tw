@@ -1,0 +1,116 @@
+created: 20190428184941390
+headingorder: 140
+modified: 20190429081145319
+tags: Різне
+title: Побудова індекса TW-проектів GitHub
+type: text/vnd.tiddlywiki
+
+!! ПОСТАНОВКА ЗАВДАННЯ
+
+Зібрати інформацію про всі проекти Тіддлівікі в обліковці //~GitHub// і побудувати єдиний (індексний) файл представлення всіх проектів.
+
+!! ПОСЛІДОВНІСТЬ КРОКІВ
+
+# Скласти список всіх TW-проектів в обліковці //~GitHub//. У нашому випадку це `github/protw`. ''З цього списку треба виключити  організаційний (базовий) проект.'' Про базовий сайт обліковки на //~GitHub// докладніше [[тут|https://protw.github.io/tw5/#%D0%9E%D1%80%D0%B3%D0%B0%D0%BD%D1%96%D0%B7%D0%B0%D1%86%D1%96%D0%B9%D0%BD%D0%B8%D0%B9%20%D1%81%D0%B0%D0%B9%D1%82%20%D0%BD%D0%B0%20Github%20Pages]]. Стисло кажучи, веб-адреси базового і решти проектів формуються наступним чином:<div>
+
+|!Тип проекту|!Сервіс|!~GitHub Pages|
+|Базовий |~GitHub |github.com/<user_name>/<user_name>.github.io |
+|Базовий |~GitHub Pages |<user_name>.github.io |
+|Звичайний |~GitHub |github.com/<user_name>/<proj_name> |
+|Звичайний |~GitHub Pages |<user_name>.github.io/<proj_name> |
+
+У нашому випадку, якщо взяти <user_name> = ''protw'' і <proj_name> = ''tw5'', то веб-адреси окремих проектів мають такі значення:
+
+|!Тип проекту|!Сервіс|!~GitHub Pages|
+|Базовий |~GitHub |github.com/protw/protw.github.io |
+|Базовий |~GitHub Pages |protw.github.io |
+|Звичайний |~GitHub |github.com/protw/tw5 |
+|Звичайний |~GitHub Pages |protw.github.io/tw5 |
+</div>
+
+# Для кожного TW-проекту в обліковці знайти файл <kbd>index.html</kbd>. Наприклад, у проекті `tw5ghs` обліковки `protw` ([[лінк|https://github.com/protw/tw5ghs]]) файл <kbd>index.html</kbd> розташований у субтеці `docs` проекту, а саме <kbd>tw5ghs/docs/index.html</kbd> ([[лінк|https://github.com/protw/tw5ghs/blob/master/docs/index.html]]).
+# Екстрагувати зі знайденого файлу <kbd>index.html</kbd> два тідлера у //div//-форматі:
+#* стандартний опис проекту <kbd>$:/boa/desc/record</kbd> і 
+#* стандартне лого проекту <kbd>$:/boa/desc/image</kbd>.
+# Ковертувати два тідлери з //div//-формату у //tid//-формат. 
+#* Для цього спочатку кожний параметр перезаписати таким чином, наприклад:
+#** з //div//-формату: `created="20190416131023055"`
+#** у //tid//-формат: `created: 20190416131023055` + <kbd>Enter</kbd>
+#* Потім видобути <kbd>вміст тідлера</kbd> з //div//-формату між тегами `<div><pre>`<kbd>вміст тідлера</kbd>`</pre></div>` і помістити його у //tid//-формат після всіх параметрів + порожній рядок (<kbd>Enter</kbd>) (див. тут нижче //Стандартне лого проекту у tid-форматі//)
+# У //tid//-форматі стандартного опису проекту і у стандартному лого проекту значення поля `title` змінити на значення з поля `pub-title`. У нашому прикладі для проекту `TW5GHS` це буде:
+#* значення з //div//-формату: `title="$:/boa/desc/record"` та `title="$:/boa/desc/image"`
+#* змінити на значення у //tid//-форматі: `title: TW5GHS` та `title: TW5GHS.img`, відповідно.
+# Зберегти у //tid//-форматі стандартний опис проекту і стандартне лого проекту як файли у //tid//-форматі з іменами, що відповідають значенням поля `title`. У нашому прикладі це буде: `TW5GHS` та `TW5GHS.img`, відповідно.<div>
+
+Місце збереження стандартних опису і лого проекту у базовому проекті - <kbd>github.com/<user_name>/<user_name>.github.io/wiki/tiddlers/</kbd>. у нашому випадку - у базовому проекті <kbd>protw/protw.github.io</kbd> у субтеці <kbd>protw.github.io/wiki/tiddlers/</kbd> ([[лінк|https://github.com/protw/protw.github.io/tree/master/wiki/tiddlers]])
+</div>
+# На цьому порядок дій щодо одного проекту завершено, після чого треба повернутися до п. 3 вище доти, доки список проектів не буде вичерпано.
+# Наостанок, залишається вирішити задачку з облаштування запуску процедури. В ідеалі треба знайти в API ~GitHub процедуру-тригер, щоб визначала подію зміни у конкретному проекті і передавала управління нашій процедурі з параметрами цього проекту.
+
+!! СТАНДАРТНИЙ ОПИС ПРОЕКТУ <kbd>$:/boa/desc/record</kbd>
+
+У середині файлу <kbd>index.html</kbd> стандартний опис проекту знаходиться у тег-дужках //div// зі значенням параметру `title`, що дорівнює <kbd>$:/boa/desc/record</kbd>
+
+```css
+<div 
+	bag="default" 
+	list="" 
+	revision="0" 
+	created="20190416131023055" 
+	modified="20190428155601094" 
+	type="text/vnd.tiddlywiki"
+
+	title="$:/boa/desc/record" 
+	tags="Портфоліо" 
+
+	pub-author-date="2019" 
+	pub-authors="Olegh Bondarenko" 
+	pub-by="protw" 
+	pub-date="20190416" 
+	pub-desc="Попередній випуск (pre-release) ~TiddlyWiki версія 5.1.20 серед іншого запровадив просто круту, а дуже круту штуку - вбудовану спроможність зберігати всю вікі на ~GitHub у один клік. З урахуванням наявного сервіса веб-публікації ~GitHub Pages, що працює безпосередньо з вашого сховища ~GitHub, процес веб-публікації спрощується до роботи з текстовим редактором - ви просто редагуєте вікі, зберігаєте її і ваші зміни одразу стають реальністю у веб-просторі." 
+	pub-desc-short="Революційний спосіб веб-публікації ~TiddlyWiki на платформі ~GitHub Pages" 
+	pub-img="$:/boa/desc/image" 
+	pub-index="008" 
+	pub-lang="ukr"
+	pub-link='https://protw.github.io/tw5ghs/'
+	pub-title="TW5GHS"
+	pub-trans-by='Olegh Bondarenko'>
+
+	<pre>
+		{{||$:/boa/template/doc-ref}}
+	</pre>
+</div>
+```
+
+!! СТАНДАРТНЕ ЛОГО ПРОЕКТУ <kbd>$:/boa/desc/image</kbd>
+
+У середині файлу <kbd>index.html</kbd> стандартне лого проекту знаходиться у тег-дужках //div// зі значенням параметру `title`, що дорівнює <kbd>$:/boa/desc/image</kbd>
+
+```css
+<div 
+	bag="default" 
+	created="20190416132130196" 
+	modified="20190428155502664" 
+	revision="0" 
+
+	title="$:/boa/desc/image" 
+	type="image/png">
+
+	<pre>
+		<!-- код зображення -->
+	</pre>
+</div>
+```
+
+!! СТАНДАРТНЕ ЛОГО ПРОЕКТУ У TID-ФОРМАТІ
+
+```
+bag: default
+created: 20190416132130196
+modified: 20190428155502664
+revision: 0
+title: $:/boa/desc/image
+type: image/png
+
+<!-- код зображення -->
+```

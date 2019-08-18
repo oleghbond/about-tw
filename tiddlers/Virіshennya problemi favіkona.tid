@@ -1,0 +1,51 @@
+created: 20190805052219165
+headingorder: 060
+modified: 20190805054800336
+tags: [[Зображення у ТВ]]
+title: Вирішення проблеми фавікона
+type: text/vnd.tiddlywiki
+
+Публікуючи декілька вікі в інтернеті з допомогою сервісу //Github Pages// я стикнувся з тим, що в деяких з них на закладці бравзера не відображався фавікон. Водночас перед тим на локальному комп'ютері все виглядало в порядку. 
+
+<<image-center favicon-issue-2.png 600px>>
+
+Експерименти з різними розмірами, форматами і глибиною кольору зображень фавікона не дали жодного результату. Обговорення у спільноті на форумі //Tiddlywiki// теж виявилися безплідними.
+
+Згодом, якимось чином, я вирішив покопирсатись у згенерованому для публікації html-коді й там помітив різницю у випадках, коли фавікон відображається і коли ні, а саме:
+
+* коли фавікон відображається, то код відображався якось так:<div>
+
+```
+<div created="20161225200011567" modified="20161225200033805" title="$:/favicon.ico" type="image/x-icon" revision="0" bag="default">
+```
+</div>
+* а коли фавікон не відображається, то html-код фавікона мав такий вигляд:<div>
+
+```
+<div _canonical_uri="./images/%2524%253A%252Ffavicon.ico" created="20180827172657219" modified="20180827172709036" title="$:/favicon.ico" type="image/x-icon" revision="2" bag="default">
+```
+</div>
+
+Різниця очевидна: фавікон не відображається, коли для виявлення фавікону використовується механізм відображення зовнішніх зображень з використанням поля `_canonical_uri` (екстерналізація). Тобто саме в тих випадках, коли цей механізм використовувався, фавікон не відображався.
+
+Отже, я вирішив виключити зображення `$:/favicon.ico` з екстерналізації. Для цього замість наведених нижче параметрів команди у файлі `tiddlywiki.info`:
+
+```
+"externalimages": [
+    "--savetiddlers [is[image]] images",
+    "--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain",
+    "--setfield [is[image]] text '' text/plain",
+    "--rendertiddler $:/plugins/tiddlywiki/tiddlyweb/save/offline externalimages.html text/plain"
+]
+```
+я реалізував такі змінені параметри:
+
+```
+"externalimages": [
+    "--savetiddlers '[is[image]] -[[$:/favicon.ico]]' images",
+    "--setfield '[is[image]] -[[$:/favicon.ico]]' _canonical_uri $:/core/templates/canonical-uri-external-image text/plain",
+    "--setfield '[is[image]] -[[$:/favicon.ico]]' text '' text/plain",
+    "--rendertiddler $:/plugins/tiddlywiki/tiddlyweb/save/offline externalimages.html text/plain"
+]
+```
+Тепер все працює!

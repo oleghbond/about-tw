@@ -1,0 +1,34 @@
+author: Mat von TWaddle
+created: 20170124212949026
+creator: twMat
+description: ListTree - style bullet lists into trees
+list: readme
+modified: 20170125112201388
+modifier: twMat
+plugin-type: plugin
+title: $:/plugins/TWaddle/ListTree
+type: application/json
+version: 1.0.1
+
+{
+    "tiddlers": {
+        "$:/plugins/TWaddle/ListTree/Stylesheet": {
+            "text": ".list-tree, .list-tree ul, .list-tree li { position: relative; }\n\n.list-tree li { list-style: none; }\n\n.list-tree ul { padding: 0 0 0 2em; }\n\n.list-tree li::before, .list-tree li::after {\n    content: \"\";\n    position: absolute;\n    left: -1em;\n}\n\n/* horizontal line */\n.list-tree li::before {\n    border-bottom: 1px solid silver;\n    top: .6em; \n    width: 7px;\n}\n\n/* vertical line */\n.list-tree ul li::after {\n    border-left: 1px solid silver;\n    height: 100%;\n    top: .1em;\n}\n\n.list-tree ul > li:last-child::after { height: .5em; }\n\n/* top-level: Lines if multiple top elements. No lines if single top element. */\n\n.list-tree > li:last-of-type:before { display:none; }\n\n.list-tree > li:first-of-type:before { border-top:1px solid silver; }\n\n.list-tree > li:before {\n    border-left: 1px solid silver;\n    height: 100%;\n}",
+            "title": "$:/plugins/TWaddle/ListTree/Stylesheet",
+            "tags": "$:/tags/Stylesheet",
+            "modifier": "twMat",
+            "modified": "20170124192920745",
+            "creator": "twMat",
+            "created": "20170124192839287"
+        },
+        "$:/plugins/TWaddle/ListTree/readme": {
+            "created": "20170124212349630",
+            "creator": "twMat",
+            "text": "[[ListTree|$:/plugins/TWaddle/ListTree]] is a stylesheet to reshape common TW ''asterisk/bullet lists'' into list trees.\n\nApply the style `list-tree` by use of the standard WikiText [[@@ technique|http://tiddlywiki.com/#Styles%20and%20Classes%20in%20WikiText]].\n\n```\n<preceding empty line, like always for bullet lists>\n@@.list-tree\n*your\n*bullet\n*list\n@@\n```\n",
+            "title": "$:/plugins/TWaddle/ListTree/readme",
+            "tags": "",
+            "modified": "20170124212453529",
+            "modifier": "twMat"
+        }
+    }
+}

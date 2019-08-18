@@ -1,0 +1,8 @@
+created: 20161222155933700
+headingorder: 010
+modified: 20181125192055039
+tags: [[Підготовка документів до друку]]
+title: Синтаксис ТВ (версія для друку)
+type: text/vnd.tiddlywiki
+
+<<makedoc filter:"tag[Синтаксис ТВ]" sortorder:"sort[headingorder]" sub1:true sub2:true>>

@@ -1,0 +1,14 @@
+created: 20170109122149567
+headingorder: 100
+icon: $:/boa/images/document-edit-outline.svg
+list-before: $:/core/ui/SideBar/Open
+modified: 20180828062305202
+tags: $:/tags/SideBar
+title: Журнал
+type: text/vnd.tiddlywiki
+
+@@float:left;width:5%;margin-right:7px; [img [$:/boa/img/document-edit-outline.svg]]@@
+
+!! Журнал "Про Тідлівікі"
+
+<<toc "Журнал" "!is[image]">>

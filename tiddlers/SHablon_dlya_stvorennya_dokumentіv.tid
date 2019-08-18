@@ -1,0 +1,18 @@
+created: 20161115104908781
+modified: 20170312112601833
+tags: [[Створення документів]]
+title: Шаблон для створення документів
+type: text/vnd.tiddlywiki
+
+Для створення документів:
+
+* __Налаштувати теку з картинками__.<br/>''Рішення:'' Відкрити тідлер [[globalImagePath]], вставити такий зміст `img/`. Це означає, що всі картинки цієї вікі розміщатимуться у цій теці.
+* __Сховати підзаголовок з датою__.<br/>''Рішення:'' Відкрити тіньовий тідлер `$:/core/ui/ViewTemplate/subtitle` (або прямо, або знайти через `More` / `Shadows`). До рядку `<div class="tc-subtitle">` вставити `style="display:none;"` так, щоб вийшло `<div class="tc-subtitle" style="display:none;">`.
+* __Сховати відображення тегів__.<br/>''Рішення:'' Відкрити тіньовий тідлер `$:/core/ui/ViewTemplate/tags` (або прямо, або знайти через `More` / `Shadows`). До рядку `<div class="tc-tags-wrapper">` вставити `style="display:none;"` так, щоб вийшло `<div class="tc-tags-wrapper" style="display:none;">`.
+* __Показувати лише один тідлер водночас__.<br/>''Рішення:'' Зайти до `ControlPanel` / `Appearance` / `Story View`. Встановити спадне меню ''Current view'' на `zoomin`.
+* __Сховати кнопки управління тідлером у правому верхньому куті__.<br/>''Рішення:'' Зайти до `ControlPanel` / `Appearance` / `Toolbars` / `View Toolbar` і зняти галочки з усіх контролів.
+* __Сховати повністю бічну панель + Story river відцентрувати без роширення__.<br/>''Рішення:''
+
+!! Також дивись:
+
+* [[How to make TW5 readonly|http://tw5readonly.tiddlyspot.com/]]

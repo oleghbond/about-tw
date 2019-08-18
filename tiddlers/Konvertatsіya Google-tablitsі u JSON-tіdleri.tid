@@ -1,0 +1,84 @@
+created: 20190511161112002
+headingorder: 140
+modified: 20190511184451533
+tags: [[Створення документів]]
+title: Конвертація Google-таблиці у JSON-тідлери
+type: text/vnd.tiddlywiki
+
+Зміст будь-якої Тідлівікі за своєю структурою даних представляє двовимірну (CxR) таблицю, де колонками (c) є поля (`title`, `text`, `tags`, `type` тощо), а рядками (r) окремі тідлери. Ця таблиця, з урахуванням прихованих і системних тідлерів, доволі проріджена і, тому, природним її представленням є JSON-формат.
+
+Той же JSON-формат також природно представляє вміст Google-таблиць. 
+
+Отже ця стаття описує простий спосіб перетворення (конвертації) Google-таблиці у набір тідлерів у JSON-форматі. 
+
+За основу метода взята розробка [[Bruno Assarisse|https://www.npmjs.com/~bassarisse]] під назвою [[google-spreadsheet-to-json|https://www.npmjs.com/package/google-spreadsheet-to-json]]. Це простий інструмент для експорту електронних Google-таблиць до JSON-файлів, що можна використовувати або під Node API, або як CLI (з командного рядка операційної системи).
+
+Установка конвертера з командного рядка відбувається таким чином:
+
+```
+  $ npm install -g google-spreadsheet-to-json
+```
+
+Конвертер `gsjson` використовується через запуск з параметрами:
+
+```
+  $ gsjson <spreadsheet-id> [file] [options]
+```
+
+Тут представлена таблиця значень деяких параметрів запуску ковертера `gsjson`, що будуть корисними саме для створення JSON-тідлерів.
+
+|!Параметр|<|!Дія|
+|!Скорочено|!Повністю|~|
+|^ -h |^--help |^вивести інформацію про використання |
+|^ -b |^--beautify |^вивести остаточний JSON-файл з відступами |
+|^ -w |^--worksheet&nbsp;&#60;n&#62; |^індекс робочого аркуша (рахується з нуля) або<br/>назва (за умовчанням назва першого аркуша,<br/>можна повторити) |
+|^ -m |^--property-mode&nbsp;&#60;mode&#62; |^як обробляти імена властивостей: "camel" (за<br/>замовчуванням), "pascal", "nospace" або "none" |
+|^ -i |^--vertical |^використовувати перший стовпець як заголовок |
+
+Для простоти розглянемо конвертацію Google-таблиці, опублікованої для всіх. Для цього попередньо в меню Google-таблиці виберемо `Файл` / `Опублікувати в Інтернеті...` Далі у діалоговому вікні виберемо `Увесь документ` і `Веб-сторінка` і натиснемо кнопку `Опублікувати`. Google-таблиця готова до конвертації.
+
+У якості прикладу візьмемо Google-таблицю, що знаходиться за веб-адресою:
+
+```
+https://docs.google.com/spreadsheets/d/abcdfg1234/edit
+```
+
+У другому аркуші `Аркуш2` цієї таблиці маємо такий вміст (3х3):
+
+|^TITLE |^PUBLISHED BY |^TEXT |
+|^FET-Open project SUMCASTEC workshop on biomedical <br/>applications of electromagnetic energy |^Anonymous |^Venue:<br/>The Bath Royal Literary<br/>Achievements<br/>FET-Open project SUMCASTEC workshop" |
+|^Launch of the European Black Sea Strategic Research |^Anonymous |^News<br/>Launch of the European Black Sea Strategic Research and Innovation Agenda<br/>Wednesday, 8 May, 2019 |
+
+Зверніть увагу на обов'язковість двох заголовків `TITLE` і `TEXT`, що відповідають назві і текстовому вмісту тідлерів.
+
+Для конвертації таблиці до JSON-формату запускаємо команду:
+
+```
+  $ gsjson abcdfg1234 data.json -b -w 1
+```
+
+Значення параметрів цієї команди мають такий смисл:
+
+* `abcdfg1234` - хеш-індекс Google-таблиці, взятий з її веб-адреси вище;
+* `data.json` - ім'я кінцевого JSON-файлу;
+* `-b` - красиве форматування JSON-файлу з відступами;
+* `-w 1` - конвертуємо другий аркуш таблиці.
+
+У підсумку отриманий файл `data.json` матиме такий вміст:
+
+```
+[
+    {
+        "title": "FET-Open project SUMCASTEC workshop",
+        "publishedBy": "Anonymous",
+        "text": "Venue: \nThe Bath Royal Literary\nAchievements\nFET-Open project SUMCASTEC workshop"
+    },
+    {
+        "title": "Launch of the European Black Sea Strategic Research",
+        "publishedBy": "Anonymous",
+        "text": "News\nLaunch of the European Black Sea Strategic Research and Innovation Agenda\nWednesday, 8 May, 2019"
+    }
+]
+```
+
+В основному це все. Отриманий файл `data.json` перетягуємо мишею до Тідлівікі і маємо два нових тідлери.
