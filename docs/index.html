@@ -12625,7 +12625,7 @@ https://docs.google.com/spreadsheets/d/abcdfg1234/edit
 
 В основному це все. Отриманий файл `data.json` перетягуємо мишею до Тідлівікі і маємо два нових тідлери.</pre>
 </div>
-<div created="20200328092441680" headingorder="160" modified="20200328101853081" tags="[[Створення документів]]" title="Конвертор валют для Гугл Таблиць" revision="0" bag="default">
+<div created="20200328092441680" headingorder="160" modified="20200328124945554" tags="[[Створення документів]]" title="Конвертор валют для Гугл Таблиць" revision="0" bag="default">
 <pre>Для ведення бухгалтерії (власної або на роботі) дуже корисно мати автоматизований доступ до обмінного курсу валют НБУ на задану дату. 
 
 У Гугл Таблицях такий доступ зручно провадити через функції. Саме з такою метою розроблена користувацька функція `CURRENCY2UAH`. Код цієї функції наданий нижче. Цей код треба вставити у тій таблиці Гугл, з якою ви працюєте через меню `Інструменти` -&gt; `Редактор сценаріїв`. І вуаля, набирайте в клітинці щось подібне:
@@ -12652,6 +12652,9 @@ https://docs.google.com/spreadsheets/d/abcdfg1234/edit
 * The currency rate is fetched from the official service of National Bank of Ukraine (NBU).
 * In case when the currency_code parameter is omitted, code 'EUR' is used.
 * An example of the function call: =CURRENCY2UAH(&quot;03.11.2019&quot;,&quot;CAD&quot;) or =CURRENCY2UAH(A3,B3).
+*
+* Author: https://protw.github.io/oleghbond
+* Issued: 2020.03.28
 *
 * @param {string} given date string (dd.mm.yyyy) for converting
 * @param {string} currency code from the list provided by NBU

@@ -1,6 +1,6 @@
 created: 20200328092441680
 headingorder: 160
-modified: 20200328101853081
+modified: 20200328124945554
 tags: [[Створення документів]]
 title: Конвертор валют для Гугл Таблиць
 
@@ -30,6 +30,9 @@ title: Конвертор валют для Гугл Таблиць
 * The currency rate is fetched from the official service of National Bank of Ukraine (NBU).
 * In case when the currency_code parameter is omitted, code 'EUR' is used.
 * An example of the function call: =CURRENCY2UAH("03.11.2019","CAD") or =CURRENCY2UAH(A3,B3).
+*
+* Author: https://protw.github.io/oleghbond
+* Issued: 2020.03.28
 *
 * @param {string} given date string (dd.mm.yyyy) for converting
 * @param {string} currency code from the list provided by NBU
