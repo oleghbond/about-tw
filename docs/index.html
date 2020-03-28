@@ -282,6 +282,8 @@ Error message and password prompt
 
 <li>command-prompt-test.png</li>
 
+<li>currency2uah.png</li>
+
 <li>DAT</li>
 
 <li>download-empty.png</li>
@@ -10331,7 +10333,7 @@ $src$
 <div created="20170102102753552" modified="20170102113916554" title="$:/GoogleAnalyticsDomain" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>protw.github.io</pre>
 </div>
-<div created="20190602095343289" modified="20190602100321577" title="$:/Import!!popup-image.png" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20190602095343289" modified="20200328182208898" title="$:/Import!!popup-image.png" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>yes</pre>
 </div>
 <div created="20190602093826386" modified="20190602100125734" title="$:/Import!!popup-Untitled" type="text/vnd.tiddlywiki" revision="0" bag="default">
@@ -11673,6 +11675,9 @@ In the tiddlers for each step of the wizard you have access to some special help
 <div _canonical_uri="./images/command-prompt-test.png" created="20170113102713589" modified="20170129145433820" tags="[[ТВ на node.js і Windows]]" title="command-prompt-test.png" type="image/png" revision="2" bag="default">
 <pre></pre>
 </div>
+<div _canonical_uri="./images/currency2uah.png" created="20200328182244117" modified="20200328182304029" title="currency2uah.png" type="image/png" revision="2" bag="default">
+<pre></pre>
+</div>
 <div created="20170306112919050" headingorder="060" modified="20190416124457782" tags="[[Хостинг Тідлівікі]]" title="DAT" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>''Decentralized Archive Transport (Dat)'' - протокол з відкритим вихідним кодом, децентралізованим засобом обміну даними для ефективного контролю версій і синхронізації змін даних.
 
@@ -12625,10 +12630,12 @@ https://docs.google.com/spreadsheets/d/abcdfg1234/edit
 
 В основному це все. Отриманий файл `data.json` перетягуємо мишею до Тідлівікі і маємо два нових тідлери.</pre>
 </div>
-<div created="20200328092441680" headingorder="160" modified="20200328165802884" tags="[[Створення документів]]" title="Конвертор валют для Гугл Таблиць" revision="0" bag="default">
+<div created="20200328092441680" headingorder="160" modified="20200328183230446" tags="[[Створення документів]]" title="Конвертор валют для Гугл Таблиць" revision="0" bag="default">
 <pre>Для ведення бухгалтерії (власної або на роботі) дуже корисно мати автоматизований доступ до обмінного курсу валют НБУ на задану дату. 
 
-У Гугл Таблицях такий доступ зручно провадити через функції. Саме з такою метою розроблена користувацька функція `CURRENCY2UAH`. Код цієї функції наданий нижче. Цей код треба вставити у тій таблиці Гугл, з якою ви працюєте через меню `Інструменти` -&gt; `Редактор сценаріїв`. І вуаля, набирайте в клітинці щось подібне:
+&lt;&lt;image-right currency2uah.png 400px&gt;&gt;
+
+У Гугл Таблицях такий доступ зручно провадити через функції. Саме з такою метою розроблена користувацька функція `CURRENCY2UAH`. Код цієї функції наданий нижче. Цей код треба вставити у тій таблиці Гугл, з якою ви працюєте через меню `Інструменти` -&gt; `Редактор сценаріїв`. І -- вуаля, набирайте в клітинці щось подібне:
 
 ```
     =CURRENCY2UAH(&quot;03.11.2019&quot;,&quot;CAD&quot;)
@@ -12653,30 +12660,36 @@ https://docs.google.com/spreadsheets/d/abcdfg1234/edit
 * the official service of National Bank of Ukraine (NBU). In case when the 
 * currency_code parameter is omitted, code 'EUR' is used. An example of the 
 * function call: =CURRENCY2UAH(&quot;03.11.2019&quot;,&quot;CAD&quot;) or =CURRENCY2UAH(A3,B3).
-* For debugging purpose please use the following call =CURRENCY2UAH(A3,B3,1),
-* which returns the date string in 'yyyymmdd' format instead.
+* The only string date format &quot;dd.mm.yyyy&quot; is supported. For cells format is
+* much more flexible. For debugging purpose please use the following call
+* =CURRENCY2UAH(A3,B3,1), which returns the date string in 'yyyymmdd' format
+* instead.
 *
 * AUTHOR: https://protw.github.io/oleghbond
 * ISSUED: 2020.03.28
 *
 * @param {string} given date string (dd.mm.yyyy) for converting
 * @param {string} currency code from the list provided by NBU
-* @param {logical} flag to return date string if format 'yyyymmdd' for debugging purpose
+* @param {logical} to return date string in format 'yyyymmdd' for debugging purpose
 * @return currency conversion rate &lt;currency_code&gt;/UAH 
 * @customfunction
 **/
 
-function currency2uah(date, currency_code,check_date) {
+function currency2uah(date, currency_code, check_date) {
   if (typeof date == 'string') {
     var date_arr = date.split(&quot;.&quot;);
-    date = new Date(Number(date_arr[2]),Number(date_arr[1])-1,Number(date_arr[0])+1);
+    date = new Date(Number(date_arr[2]),Number(date_arr[1])-1,Number(date_arr[0]) + 1);
+  } 
+  else if (typeof date == 'object') {
+    date = new Date(date);
+    date.setDate(date.getDate() + 1);
   }
-  if (currency_code === undefined) currency_code = &quot;EUR&quot;;
-  var date_YMD = Utilities.formatDate(date, &quot;GMT+1&quot;, &quot;yyyyMMdd&quot;);
+  var date_YMD = Utilities.formatDate(date, &quot;GMT&quot;, &quot;yyyyMMdd&quot;);
   if (check_date !== undefined &amp;&amp; check_date) return date_YMD;
   var json_req = &quot;https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&amp;date=&quot; + date_YMD;
   var response = UrlFetchApp.fetch(json_req);
   var rates = JSON.parse(response.getContentText());
+  if (currency_code === undefined) currency_code = &quot;EUR&quot;;
   for (var r of rates)
     if (r.cc == currency_code) {
       var rate = r.rate;
