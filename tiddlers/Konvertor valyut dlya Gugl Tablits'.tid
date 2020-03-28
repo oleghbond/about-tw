@@ -1,6 +1,6 @@
 created: 20200328092441680
 headingorder: 160
-modified: 20200328124945554
+modified: 20200328165802884
 tags: [[Створення документів]]
 title: Конвертор валют для Гугл Таблиць
 
@@ -25,25 +25,33 @@ title: Конвертор валют для Гугл Таблиць
 ```javascript
 /** Converts a given currency to UAH for a given date.
 *
-* Summary. Converts a given currency (the 2nd argument) to UAH for a given date (the 1st argument).
-* For currency code the 3 character descriptor of ISO 4217 standard is used.
-* The currency rate is fetched from the official service of National Bank of Ukraine (NBU).
-* In case when the currency_code parameter is omitted, code 'EUR' is used.
-* An example of the function call: =CURRENCY2UAH("03.11.2019","CAD") or =CURRENCY2UAH(A3,B3).
+* SUMMARY. The function aims to convert a given currency (the 2nd argument) 
+* to UAH for a given date (the 1st argument). For currency code the 3 character
+* descriptor of ISO 4217 standard is used. The currency rate is fetched from
+* the official service of National Bank of Ukraine (NBU). In case when the 
+* currency_code parameter is omitted, code 'EUR' is used. An example of the 
+* function call: =CURRENCY2UAH("03.11.2019","CAD") or =CURRENCY2UAH(A3,B3).
+* For debugging purpose please use the following call =CURRENCY2UAH(A3,B3,1),
+* which returns the date string in 'yyyymmdd' format instead.
 *
-* Author: https://protw.github.io/oleghbond
-* Issued: 2020.03.28
+* AUTHOR: https://protw.github.io/oleghbond
+* ISSUED: 2020.03.28
 *
 * @param {string} given date string (dd.mm.yyyy) for converting
 * @param {string} currency code from the list provided by NBU
+* @param {logical} flag to return date string if format 'yyyymmdd' for debugging purpose
 * @return currency conversion rate <currency_code>/UAH 
 * @customfunction
 **/
 
-function currency2uah(date, currency_code) {
-  if (currency_code === undefined)
-    currency_code = "EUR";
+function currency2uah(date, currency_code,check_date) {
+  if (typeof date == 'string') {
+    var date_arr = date.split(".");
+    date = new Date(Number(date_arr[2]),Number(date_arr[1])-1,Number(date_arr[0])+1);
+  }
+  if (currency_code === undefined) currency_code = "EUR";
   var date_YMD = Utilities.formatDate(date, "GMT+1", "yyyyMMdd");
+  if (check_date !== undefined && check_date) return date_YMD;
   var json_req = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&date=" + date_YMD;
   var response = UrlFetchApp.fetch(json_req);
   var rates = JSON.parse(response.getContentText());
@@ -54,5 +62,4 @@ function currency2uah(date, currency_code) {
     }
   return rate;
 }
-
 ```
