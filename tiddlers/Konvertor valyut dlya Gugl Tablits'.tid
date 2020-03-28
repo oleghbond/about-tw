@@ -1,0 +1,55 @@
+created: 20200328092441680
+headingorder: 160
+modified: 20200328101853081
+tags: [[Створення документів]]
+title: Конвертор валют для Гугл Таблиць
+
+Для ведення бухгалтерії (власної або на роботі) дуже корисно мати автоматизований доступ до обмінного курсу валют НБУ на задану дату. 
+
+У Гугл Таблицях такий доступ зручно провадити через функції. Саме з такою метою розроблена користувацька функція `CURRENCY2UAH`. Код цієї функції наданий нижче. Цей код треба вставити у тій таблиці Гугл, з якою ви працюєте через меню `Інструменти` -> `Редактор сценаріїв`. І вуаля, набирайте в клітинці щось подібне:
+
+```
+    =CURRENCY2UAH("03.11.2019","CAD")
+```
+
+або
+
+```
+    =CURRENCY2UAH(A3,B3)
+```
+
+Все працює.
+
+!! Javascript код конвертора валют для Гугл Таблиць
+
+```javascript
+/** Converts a given currency to UAH for a given date.
+*
+* Summary. Converts a given currency (the 2nd argument) to UAH for a given date (the 1st argument).
+* For currency code the 3 character descriptor of ISO 4217 standard is used.
+* The currency rate is fetched from the official service of National Bank of Ukraine (NBU).
+* In case when the currency_code parameter is omitted, code 'EUR' is used.
+* An example of the function call: =CURRENCY2UAH("03.11.2019","CAD") or =CURRENCY2UAH(A3,B3).
+*
+* @param {string} given date string (dd.mm.yyyy) for converting
+* @param {string} currency code from the list provided by NBU
+* @return currency conversion rate <currency_code>/UAH 
+* @customfunction
+**/
+
+function currency2uah(date, currency_code) {
+  if (currency_code === undefined)
+    currency_code = "EUR";
+  var date_YMD = Utilities.formatDate(date, "GMT+1", "yyyyMMdd");
+  var json_req = "https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json&date=" + date_YMD;
+  var response = UrlFetchApp.fetch(json_req);
+  var rates = JSON.parse(response.getContentText());
+  for (var r of rates)
+    if (r.cc == currency_code) {
+      var rate = r.rate;
+      break;
+    }
+  return rate;
+}
+
+```
