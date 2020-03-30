@@ -1,0 +1,187 @@
+created: 20200330170527969
+modified: 20200330182144850
+tags: Журнал
+title: 200330 Визначення закінчення пандемії
+
+!! ''ЯК ВИЗНАЧИТИ, НА ЯКІЙ ФАЗІ ПАНДЕМІЇ ПЕРЕБУВАЄ КРАЇНА''
+
+Користуючись відкритими даними ~CSSEGISandData/COVID-19 отримуємо щоденні дані з 22.1.2020 щодо підтверджених випадків (confirmed), померлих (deaths) і одужавших (recovered) для 177 адміністративних суб'єктів включно з двома круїзними суднами (MS Zaandam та Diamond Princess) і Ватиканом.
+
+Все населення $$P$$ будь-якої адміністративної одиниці розділено на дві частини: інфіковані $$I$$ і неінфіковані $$N$$:
+$$
+P = I + N
+$$
+Чисельність інфікованих $$I$$ невідома, але вона, окрім нвідомої частини (unknown) $$U$$, включає до себе відому частину, що називають підтвердженими випадками $$C$$ (confirmed):
+$$
+I = U + C
+$$
+Остання категорія $$C$$ поділяється на дві, теж відомі, частини: ті, які перебувають у стані хвороби (sick) $$S$$, і ті, які його пройшли (passed) $$P$$:
+$$
+C = S + P
+$$
+Зі стану хвороби є перехід лише у два стани: померлих (deaths) $$D$$ і одужавших (recovered) $$R$$. Тобто категорія $$P$$ складається з двох складових:
+$$
+P = D + R
+$$
+Зрештою всі захворілі $$S$$ перейдуть у два останніх стани $$D$$ і $$R$$. Саме момент, коли $$C = P, S = 0$$ (тобто хворих не залишилось), можна вважати, що пандемія позаду.
+
+В математичних термінах це можна виразити у відомих (виміряних) величинах як відношення $$\alpha$$ суми померлих і одужавших $$D + R$$ до підтверджених $$C$$. Досягнення цим відношенням 1 (або 100%) -- $$\alpha \implies 1$$ означатиме закінчення пандемії:
+$$
+\alpha = \frac{D + R}C \implies 1
+$$
+
+Безумовно залишаються питання до достовірності даних, але то вже інша історія.
+
+На представленому графіку станом на 29.03.2020 видно, що Китай найближче підійшов до виходу з пандемії (96.5%). Італія, попри всі негаразди, і Франція вийшли на рівень 25% і відстають від того рівня Китая на 5 тижнів.
+
+<<image-center covid-19.png 90%>>
+
+Поки зарано надавати остаточні прогнози, але ясно одне - такі країни як Україна і США лише на початку розвитку пандемічної хвилі зі своїм рівнем відношення у 3%.
+
+Слідкуйте за нашими оновленнями.
+
+!! Власне код
+
+Повний код Octave представлений нижче для вільного використання. Користуйтесь на здоров'я:
+
+```matlab
+# CODE FOR DETERMINATION OF THE PANDEMIC END
+# Author: Olegh Bondarenko, https://protw.github.io/oleghbond
+# Date: 2020-03-29
+function covid
+  # action == 1 - launches data update from the source and saves locally
+  # action == 0 - uses the last data set stored locally
+  action = 0;
+  if action
+    DATA = check_covid_data;
+    save data DATA
+  else
+    load data
+    load population
+  endif
+  confirmed = DATA.confirmed;
+  deaths = DATA.deaths;
+  recovered = DATA.recovered;
+  country = DATA.country;
+  days = DATA.days;
+  rep_date = DATA.date;
+  
+  flt = {'Ukraine' 'US' 'Italy' 'China' ...
+         'France' 'Germany'}; # 'Poland' 'Finland' 
+  [~,iflt,jflt]=intersect(country,flt);
+  # 'y_adjust' is of the same size and order as in 'flt'
+  # it used to adjust vertical position of label 'country'
+  y_adjust = [1.5 0.8 1.05 1 0.95 1]; 
+  
+  x = days-days(1);
+  y = (deaths(iflt,:)'+recovered(iflt,:)')./confirmed(iflt,:)'*100;
+  date_range_str = [datestr(days(1),29) ' - ' datestr(days(end),29)];
+
+  figure(1)
+  plot(x,y)
+  xlabel('confimed')
+  ylabel('(deaths+recovered)/confirmed')
+  title(['COVID-19: ' date_range_str])
+  legend(flt(jflt),'location','northwest')
+  #set(gca,'xscale','log')
+  grid on
+  text(x(end)*ones(1,size(y,2)),y(end,:).*y_adjust(jflt),flt(jflt))
+endfunction
+
+function DATA = check_covid_data
+  DAT = convert_struct;
+  i = 0;
+  for [d, label] = DAT
+    country_prov = {d.Dat.country};
+    country = unique(country_prov);
+    days = d.days;
+    dat = [];
+    for j = 1:length(d.Dat)
+      dat = [dat; d.Dat(j).dat];
+    endfor
+    dats = [];
+    for c = country
+      ind = strcmp(country_prov,c);
+      dats = [dats; sum(dat(ind,:),1)];
+    endfor
+    DATA.(label) = dats;
+    if !i++
+      DATA.country = country;
+      DATA.days = days;
+      label0 = label;
+    else
+      k = 1;
+      ident(k++) = identicsarr(DATA.country,country);
+      ident(k++) = identicnarr(DATA.days,days);
+      ident(k) = all(size(DATA.(label0)) == size(DATA.(label)));
+      if !all(ident)
+        printf('Data sets %s and %s are not identical!\n',label0,label)
+        printf('Ident values = %s\n',mat2str(ident))
+        error('PLEASE CHECK THE DATA!')
+      endif
+    endif
+  endfor
+  DATA.country = DATA.country';
+  DATA.date = datestr(now,31);
+endfunction
+
+function ident = identicnarr(narr1,narr2)
+  if all(size(narr1) == size(narr2)) && all(narr1(:) == narr2(:))
+    ident = 1;
+  else
+    ident = 0;
+  endif
+endfunction
+
+function ident = identicsarr(sarr1,sarr2)
+  if all(size(sarr1) == size(sarr2)) && all(strcmp(sarr1(:),sarr2(:)))
+    ident = 1;
+  else
+    ident = 0;
+  endif
+endfunction
+
+function DAT = convert_struct
+  data_src = get_data_src;
+  idat = 1;
+  for [web_address, label] = data_src
+    disp([label ' = ' web_address])
+    sdat = urlread(web_address);
+    sdat = strrep(sdat,'"Korea, South"','Korea South');
+    lines = strsplit(sdat,{'\r' '\n'});
+    head = strsplit(lines{1},',');
+    for i = 5:length(head)
+      mdy = str2num(strrep(head{i},'/',','));
+      days(i-4) = datenum(mdy(3)+2000,mdy(1),mdy(2));
+    endfor
+    DAT.(label).days = days;
+    for i = 2:length(lines)
+      if length(lines{i}) == 0, break, endif
+      dat = strsplit(lines{i},',');
+      i1 = i - 1;
+      Dat(i1).province = dat{1};
+      Dat(i1).country = dat{2};
+      Dat(i1).lat = str2num(dat{3});
+      Dat(i1).long = str2num(dat{4});
+      Dat(i1).dat = str2num(strjoin(dat(5:end),' '));
+    endfor
+    DAT.(label).Dat = Dat;
+  endfor
+endfunction
+
+function data_src = get_data_src
+  time_series_covid19_path = [...
+    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/'...
+    'master/csse_covid_19_data/csse_covid_19_time_series/'];
+  time_series_covid19_confirmed_global = [time_series_covid19_path ...
+    'time_series_covid19_confirmed_global.csv'];
+  time_series_covid19_deaths_global = [time_series_covid19_path ...
+    'time_series_covid19_deaths_global.csv'];
+  time_series_covid19_recovered_global = [time_series_covid19_path ...
+    'time_series_covid19_recovered_global.csv'];
+    
+  data_src.confirmed = time_series_covid19_confirmed_global;
+  data_src.deaths = time_series_covid19_deaths_global;
+  data_src.recovered = time_series_covid19_recovered_global;
+endfunction
+```
