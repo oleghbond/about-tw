@@ -274,14 +274,6 @@ Error message and password prompt
 
 <li>10-fork.png</li>
 
-<li>200330 Визначення закінчення пандемії</li>
-
-<li>2017-01-02 Початок</li>
-
-<li>2017-01-09 Альтернатива інфо феодалізму?</li>
-
-<li>2017-01-09 Радіація: дози, ефекти, ризики</li>
-
 <li>command-prompt-test.png</li>
 
 <li>covid-19.png</li>
@@ -331,6 +323,8 @@ Error message and password prompt
 <li>Автонумерація об'єктів в документі Ворд</li>
 
 <li>Автопублікація Tiddlywiki на Github Pages</li>
+
+<li>Альтернатива інфо феодалізму?</li>
 
 <li>Варіанти розгортання TW</li>
 
@@ -416,6 +410,8 @@ Error message and password prompt
 
 <li>Посібник користувача Тідлівікі</li>
 
+<li>Початок</li>
+
 <li>Початок роботи</li>
 
 <li>Початок роботи (зміст)</li>
@@ -429,6 +425,8 @@ Error message and password prompt
 <li>Простий метод вставити зображення</li>
 
 <li>Просунутий нумерований список</li>
+
+<li>Радіація: дози, ефекти, ризики</li>
 
 <li>Резервне копіювання</li>
 
@@ -481,6 +479,8 @@ Error message and password prompt
 <li>Швидкий екскурс до таблиць</li>
 
 <li>Ширина колонки таблиці</li>
+
+<li>Як визначити закінчення пандемії</li>
 
 <li>Як додати інтерактивну SVG-схему</li>
 
@@ -11642,257 +11642,10 @@ In the tiddlers for each step of the wizard you have access to some special help
 <div _canonical_uri="./images/10-fork.png" created="20161215160012650" modified="20170129145433826" tags="[[Автопублікація Tiddlywiki на Github Pages]]" title="10-fork.png" type="image/png" revision="2" bag="default">
 <pre></pre>
 </div>
-<div created="20200330170527969" modified="20200330182144850" tags="Журнал" title="200330 Визначення закінчення пандемії" revision="0" bag="default">
-<pre>!! ''ЯК ВИЗНАЧИТИ, НА ЯКІЙ ФАЗІ ПАНДЕМІЇ ПЕРЕБУВАЄ КРАЇНА''
-
-Користуючись відкритими даними ~CSSEGISandData/COVID-19 отримуємо щоденні дані з 22.1.2020 щодо підтверджених випадків (confirmed), померлих (deaths) і одужавших (recovered) для 177 адміністративних суб'єктів включно з двома круїзними суднами (MS Zaandam та Diamond Princess) і Ватиканом.
-
-Все населення $$P$$ будь-якої адміністративної одиниці розділено на дві частини: інфіковані $$I$$ і неінфіковані $$N$$:
-$$
-P = I + N
-$$
-Чисельність інфікованих $$I$$ невідома, але вона, окрім нвідомої частини (unknown) $$U$$, включає до себе відому частину, що називають підтвердженими випадками $$C$$ (confirmed):
-$$
-I = U + C
-$$
-Остання категорія $$C$$ поділяється на дві, теж відомі, частини: ті, які перебувають у стані хвороби (sick) $$S$$, і ті, які його пройшли (passed) $$P$$:
-$$
-C = S + P
-$$
-Зі стану хвороби є перехід лише у два стани: померлих (deaths) $$D$$ і одужавших (recovered) $$R$$. Тобто категорія $$P$$ складається з двох складових:
-$$
-P = D + R
-$$
-Зрештою всі захворілі $$S$$ перейдуть у два останніх стани $$D$$ і $$R$$. Саме момент, коли $$C = P, S = 0$$ (тобто хворих не залишилось), можна вважати, що пандемія позаду.
-
-В математичних термінах це можна виразити у відомих (виміряних) величинах як відношення $$\alpha$$ суми померлих і одужавших $$D + R$$ до підтверджених $$C$$. Досягнення цим відношенням 1 (або 100%) -- $$\alpha \implies 1$$ означатиме закінчення пандемії:
-$$
-\alpha = \frac{D + R}C \implies 1
-$$
-
-Безумовно залишаються питання до достовірності даних, але то вже інша історія.
-
-На представленому графіку станом на 29.03.2020 видно, що Китай найближче підійшов до виходу з пандемії (96.5%). Італія, попри всі негаразди, і Франція вийшли на рівень 25% і відстають від того рівня Китая на 5 тижнів.
-
-&lt;&lt;image-center covid-19.png 90%&gt;&gt;
-
-Поки зарано надавати остаточні прогнози, але ясно одне - такі країни як Україна і США лише на початку розвитку пандемічної хвилі зі своїм рівнем відношення у 3%.
-
-Слідкуйте за нашими оновленнями.
-
-!! Власне код
-
-Повний код Octave представлений нижче для вільного використання. Користуйтесь на здоров'я:
-
-```matlab
-# CODE FOR DETERMINATION OF THE PANDEMIC END
-# Author: Olegh Bondarenko, https://protw.github.io/oleghbond
-# Date: 2020-03-29
-function covid
-  # action == 1 - launches data update from the source and saves locally
-  # action == 0 - uses the last data set stored locally
-  action = 0;
-  if action
-    DATA = check_covid_data;
-    save data DATA
-  else
-    load data
-    load population
-  endif
-  confirmed = DATA.confirmed;
-  deaths = DATA.deaths;
-  recovered = DATA.recovered;
-  country = DATA.country;
-  days = DATA.days;
-  rep_date = DATA.date;
-  
-  flt = {'Ukraine' 'US' 'Italy' 'China' ...
-         'France' 'Germany'}; # 'Poland' 'Finland' 
-  [~,iflt,jflt]=intersect(country,flt);
-  # 'y_adjust' is of the same size and order as in 'flt'
-  # it used to adjust vertical position of label 'country'
-  y_adjust = [1.5 0.8 1.05 1 0.95 1]; 
-  
-  x = days-days(1);
-  y = (deaths(iflt,:)'+recovered(iflt,:)')./confirmed(iflt,:)'*100;
-  date_range_str = [datestr(days(1),29) ' - ' datestr(days(end),29)];
-
-  figure(1)
-  plot(x,y)
-  xlabel('confimed')
-  ylabel('(deaths+recovered)/confirmed')
-  title(['COVID-19: ' date_range_str])
-  legend(flt(jflt),'location','northwest')
-  #set(gca,'xscale','log')
-  grid on
-  text(x(end)*ones(1,size(y,2)),y(end,:).*y_adjust(jflt),flt(jflt))
-endfunction
-
-function DATA = check_covid_data
-  DAT = convert_struct;
-  i = 0;
-  for [d, label] = DAT
-    country_prov = {d.Dat.country};
-    country = unique(country_prov);
-    days = d.days;
-    dat = [];
-    for j = 1:length(d.Dat)
-      dat = [dat; d.Dat(j).dat];
-    endfor
-    dats = [];
-    for c = country
-      ind = strcmp(country_prov,c);
-      dats = [dats; sum(dat(ind,:),1)];
-    endfor
-    DATA.(label) = dats;
-    if !i++
-      DATA.country = country;
-      DATA.days = days;
-      label0 = label;
-    else
-      k = 1;
-      ident(k++) = identicsarr(DATA.country,country);
-      ident(k++) = identicnarr(DATA.days,days);
-      ident(k) = all(size(DATA.(label0)) == size(DATA.(label)));
-      if !all(ident)
-        printf('Data sets %s and %s are not identical!\n',label0,label)
-        printf('Ident values = %s\n',mat2str(ident))
-        error('PLEASE CHECK THE DATA!')
-      endif
-    endif
-  endfor
-  DATA.country = DATA.country';
-  DATA.date = datestr(now,31);
-endfunction
-
-function ident = identicnarr(narr1,narr2)
-  if all(size(narr1) == size(narr2)) &amp;&amp; all(narr1(:) == narr2(:))
-    ident = 1;
-  else
-    ident = 0;
-  endif
-endfunction
-
-function ident = identicsarr(sarr1,sarr2)
-  if all(size(sarr1) == size(sarr2)) &amp;&amp; all(strcmp(sarr1(:),sarr2(:)))
-    ident = 1;
-  else
-    ident = 0;
-  endif
-endfunction
-
-function DAT = convert_struct
-  data_src = get_data_src;
-  idat = 1;
-  for [web_address, label] = data_src
-    disp([label ' = ' web_address])
-    sdat = urlread(web_address);
-    sdat = strrep(sdat,'&quot;Korea, South&quot;','Korea South');
-    lines = strsplit(sdat,{'\r' '\n'});
-    head = strsplit(lines{1},',');
-    for i = 5:length(head)
-      mdy = str2num(strrep(head{i},'/',','));
-      days(i-4) = datenum(mdy(3)+2000,mdy(1),mdy(2));
-    endfor
-    DAT.(label).days = days;
-    for i = 2:length(lines)
-      if length(lines{i}) == 0, break, endif
-      dat = strsplit(lines{i},',');
-      i1 = i - 1;
-      Dat(i1).province = dat{1};
-      Dat(i1).country = dat{2};
-      Dat(i1).lat = str2num(dat{3});
-      Dat(i1).long = str2num(dat{4});
-      Dat(i1).dat = str2num(strjoin(dat(5:end),' '));
-    endfor
-    DAT.(label).Dat = Dat;
-  endfor
-endfunction
-
-function data_src = get_data_src
-  time_series_covid19_path = [...
-    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/'...
-    'master/csse_covid_19_data/csse_covid_19_time_series/'];
-  time_series_covid19_confirmed_global = [time_series_covid19_path ...
-    'time_series_covid19_confirmed_global.csv'];
-  time_series_covid19_deaths_global = [time_series_covid19_path ...
-    'time_series_covid19_deaths_global.csv'];
-  time_series_covid19_recovered_global = [time_series_covid19_path ...
-    'time_series_covid19_recovered_global.csv'];
-    
-  data_src.confirmed = time_series_covid19_confirmed_global;
-  data_src.deaths = time_series_covid19_deaths_global;
-  data_src.recovered = time_series_covid19_recovered_global;
-endfunction
-```</pre>
-</div>
-<div created="20170102175418605" modified="20170109115518987" tags="Журнал" title="2017-01-02 Початок" type="text/vnd.tiddlywiki" revision="0" bag="default">
-<pre>Tiddlywiki це персональна вікі, розроблена Джеремі Растоном (Jeremy Ruston). Tiddlywiki написана на ~JavaScript і, за визначенням автора, є //нелінійним блокнотом для нотування, організації та поширення складної інформації//. Tiddlywiki це дуже інтерактивна програма і   надає безпрецедентну свободу людині для збереження цінної інформації під власним контролем. 
-
-Якщо зовсім стисло, то Tiddlywiki це самоплатформа для створення смислів. Або інакше - створення матеріалу для розміщення в інтернеті надає забагато задоволення для того, щоб залишити це розробникам.
-
-Однією, але не єдиною вражаючою рисою Tiddlywiki є те, що вся вікі включно з кодом зберігається в одному файлі і для роботи з нею достатньо лише браузера на локальному комп'ютері. Але це не єдиний спосіб запуску. Одним з альтернативних варіантів, що надає ще більшої гнучкості, це запуск Tiddlywiki під Node.js.
-
-Базова документація Tiddlywiki (англійською) розташована на [[tiddlywiki.com|http://tiddlywiki.com/]]. Також короткий дохідливий вступ-презентацію можна знайти [[тут|http://tiddlywiki.com/editions/introduction/]].
-
-!! УКРАЇНСЬКИЙ КОНТЕКСТ
-
-Дивним є те, що Tiddlywiki й досі практично не відома в українському сегменті вебу. Також серед більш ніж 20 перекладів її інтерфейсу український відсутній.
-
-Власне запуск ресурсу [[protw.github.io|https://protw.github.io]], а також супровідних груп для [[оголошень і анонсів|https://www.facebook.com/groups/protw5]] та для [[обговорень і дискусій|https://groups.io/g/protw]] має на меті поштовх і сприяння розвитку Tiddlywiki як платформи створення матеріалів у вебі на наших теренах.
-
-Для старту про ТВ ви можете прочитати українською і тут же опробувати її на ресурсі [[protw.github.io/tw5|https://protw.github.io/tw5/]]. 
-
-Згодом, за побажанням, ви зможете самостійно розміщати ваші матеріали на ресурсі [[protw.github.io|https://protw.github.io]]. Для цього з усіх пов'язаних питань звертайтеся до групи для обговорень і дискусій [[groups.io/g/protw|https://groups.io/g/protw]].</pre>
-</div>
-<div created="20170109114007980" modified="20170109124425802" tags="Журнал" title="2017-01-09 Альтернатива інфо феодалізму?" type="text/vnd.tiddlywiki" revision="0" bag="default">
-<pre>Чи є альтернатива сучасному інформаційному феодалізму?
-
-Для веб-розробників - а це покоління &quot;софтверно&quot; заточених людей, яке виросло разом з вебом - веб є місцем безпрецедентного експериментування і натхнення, а також для особистого самовираження.
-
-Але для більшості громадян Землі, це особисте самовираження обмежене і модулюється потребами корпорацій-провайдерів і урядами країн, де ці компанії працюють. Як результат, зворотня прихована сторона футуристично-подібного вебу полягає в тім, що традиційна архітектура клієнт-сервер привела нас до сучасної версії середньовічного феодалізму.
-
-Небагато людей мають свободу користуватися приватним простором, де їх думки є їхньою власністю і де вони контролюють своє власне середовище з власними налаштуваннями та інструментарієм.
-
-Колись на зорі Інтернету бути в архітектурі клієнт-сервер не було проблемою: кожна група мала спільну частку сервера, якою вони спільно користувалися, а інтернет був тоді мережею мереж, а не як це вбачається сьогодні &quot;тканиною&quot; поєднання окремих пристроїв.
-
-Бар'єри для ведення власного сервера для пересічних громадян величезні: це нова вартість для більшості людей при тому, що переваги здебільшого нематеріальні і до цього наявні негативні наслідки певних ситуацій, що можуть бути непропорційно невблаганними, наприклад: неспроможність збереження резервних копій власних даних або необхідність безперервної підтримки в актуальному стані програмного забезпечення безпеки або призупинення чи навіть припинення певного сервісу.
-
-Це надає привабливості особистому серверному простору від провайдерів Інтернет-послуг, таких як Google, Facebook і Twitter. Ми знаємо, як це угода закінчується: послуги мають бути використані користувачами, оскільки ці послуги є єдиним активом, що компанія має. Подібний стан речей призводить до негайної асиметрії між тими, хто володіє або управляє серверами, та споживачами сервісів.
-
-Отже, чи є альтернатива? Існує купа захоплюючих проектів, що досліджують децентралізацію в Інтернеті: використання технології рівний-до-рівного (peer-to-peer або P2P) для створення соціальних мереж, що мають подібну до Twitter&amp;nbsp;поведінку без загального централізованого контролю. Але проблема з цими зусиллями в тому, що вони, як і раніше, вимагають від учасників підтримки або власного сервера, або місця на сервері, яким керує хтось інший.
-
-Також швидко ростуть інші центри обробки даних, сервери будуть перевершували сервери запечені в тканину об'єктів в нашому житті: те, що називають [[IoT|https://uk.wikipedia.org/wiki//Інтернет_речей]] або навіть ~IoE (//Internet of Everything//).
-
-На сьогодні рішенням такого &quot;безсерверного&quot; світу є ~TiddlyWiki. Зокрема, для тих, хто не має власного контрольованого серверу, або для тих, чиє єдине з'єднання з інтернетом є подорожня флешка.
-
-Звичайно, браузер це програма для перегляду HTML-сторінок, але це також найпродуктивніша, портативна персональна віртуальна машина (VM) з чудовою властивістю - кінцеві користувачі можуть бути самі собі провайдерами.
-
-Таким чином, ~TiddlyWiki це можливість ре-демократизації веба, це спосіб для створення користувацьких інтерактивних веб-додатків з невеликого числа простих компонентів, а також це універсальна ментальна модель для зберігання і багаторазового використання інформації.
-
-!! Джерело
-
-* [[J.Ruston. Serverlessness|http://tiddlywiki.com/talkytalky/#Serverlessness]]
-* [[Про Тідлівікі. Посібник для користування Тідлівікі 5+. ProTW|https://protw.github.io/tw5]]</pre>
-</div>
-<div created="20170109115806181" modified="20170109120303218" tags="Журнал" title="2017-01-09 Радіація: дози, ефекти, ризики" type="text/vnd.tiddlywiki" revision="0" bag="default">
-<pre>Публікація НКДАР ООН щодо дії іонізуючого випромінення на людину.
-
-Ця брошура вперше опублікована у 1985 році і в значній мірі ґрунтується на результатах наукового комітету ООН з дії атомної радіації, що є допоміжним органом Генеральної Асамблеї Організації Об'єднаних Націй. У публікації підсумовані достовірні знання про джерела радіації, її дії на людину і навколишнє середовище.
-
-Парадоксальним є те, що публікація не втратила своєї актуальності попри значні зміни, що відбулися у світі. Тому є декілька пояснень. Фундаментальні загальновизнані знання у сфері дії радіації на людину за минулі роки значно розширилися, але принципові закономірності залишилися непохитними.
-
-Не дивлячись на уроки Чорнобиля і Фукусіми, людство не відмовилось від використання радіації, а у певних галузях воно навіть поширюється (наприклад, томографія, певне відновлення програм атомної енергетики у ряді країн).
-
-!! Джерело:
-
-* [[Радіація: дози, ефекти, ризики. UNEP, 1985. Переклад: oleghbond, Опубліковано: protw, ukr, 16-12-2011|https://protw.github.io/rder-uk/]]
-</pre>
-</div>
 <div _canonical_uri="./images/command-prompt-test.png" created="20170113102713589" modified="20170129145433820" tags="[[ТВ на node.js і Windows]]" title="command-prompt-test.png" type="image/png" revision="2" bag="default">
 <pre></pre>
 </div>
-<div _canonical_uri="./images/covid-19.png" created="20200331075344124" modified="20200331075348724" title="covid-19.png" type="image/png" revision="2" bag="default">
+<div _canonical_uri="./images/covid-19.png" created="20200401122009125" modified="20200401122015199" title="covid-19.png" type="image/png" revision="2" bag="default">
 <pre></pre>
 </div>
 <div _canonical_uri="./images/currency2uah.png" created="20200328182244117" modified="20200328182304029" title="currency2uah.png" type="image/png" revision="2" bag="default">
@@ -12258,6 +12011,36 @@ Gitlab є замінником (еквівалентом) Github, але на в
 # Найпростіший варіант: Скачайте собі на комп'ютер порожню вікі [[empty.html|Встановлення ТВ на комп'ютер]] із сайту Тідлівікі. Відкрийте новий тідлер. Створіть потрібний контент. Перегляньте як він виглядає в режимі перегляду. У разі прийнятного результату //copy-and-paste// вікі-код тексту у відповідний тідлер у своєму репозитарії. 
 # Більш цікавий варіант: створіть копію свого репозитарію з ~GitHub на своєму локальному комп'ютері методами Git. Встановіть Node.js на своєму локальному комп'ютері і запустіть свою вікі на власному комп'ютері під управлінням Node.js (див. [[приклад для Windows|ТВ на node.js і Windows]]). Після внесення змін або додавання матеріалу до вікі на комп'ютері синхронізуйте вміст (commit and push changes) з мастер-копією на ~GitHub. 
 </pre>
+</div>
+<div created="20170109114007980" modified="20200401122200297" tags="Журнал" title="Альтернатива інфо феодалізму?" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<pre>Чи є альтернатива сучасному інформаційному феодалізму?
+
+Для веб-розробників - а це покоління &quot;софтверно&quot; заточених людей, яке виросло разом з вебом - веб є місцем безпрецедентного експериментування і натхнення, а також для особистого самовираження.
+
+Але для більшості громадян Землі, це особисте самовираження обмежене і модулюється потребами корпорацій-провайдерів і урядами країн, де ці компанії працюють. Як результат, зворотня прихована сторона футуристично-подібного вебу полягає в тім, що традиційна архітектура клієнт-сервер привела нас до сучасної версії середньовічного феодалізму.
+
+Небагато людей мають свободу користуватися приватним простором, де їх думки є їхньою власністю і де вони контролюють своє власне середовище з власними налаштуваннями та інструментарієм.
+
+Колись на зорі Інтернету бути в архітектурі клієнт-сервер не було проблемою: кожна група мала спільну частку сервера, якою вони спільно користувалися, а інтернет був тоді мережею мереж, а не як це вбачається сьогодні &quot;тканиною&quot; поєднання окремих пристроїв.
+
+Бар'єри для ведення власного сервера для пересічних громадян величезні: це нова вартість для більшості людей при тому, що переваги здебільшого нематеріальні і до цього наявні негативні наслідки певних ситуацій, що можуть бути непропорційно невблаганними, наприклад: неспроможність збереження резервних копій власних даних або необхідність безперервної підтримки в актуальному стані програмного забезпечення безпеки або призупинення чи навіть припинення певного сервісу.
+
+Це надає привабливості особистому серверному простору від провайдерів Інтернет-послуг, таких як Google, Facebook і Twitter. Ми знаємо, як це угода закінчується: послуги мають бути використані користувачами, оскільки ці послуги є єдиним активом, що компанія має. Подібний стан речей призводить до негайної асиметрії між тими, хто володіє або управляє серверами, та споживачами сервісів.
+
+Отже, чи є альтернатива? Існує купа захоплюючих проектів, що досліджують децентралізацію в Інтернеті: використання технології рівний-до-рівного (peer-to-peer або P2P) для створення соціальних мереж, що мають подібну до Twitter&amp;nbsp;поведінку без загального централізованого контролю. Але проблема з цими зусиллями в тому, що вони, як і раніше, вимагають від учасників підтримки або власного сервера, або місця на сервері, яким керує хтось інший.
+
+Також швидко ростуть інші центри обробки даних, сервери будуть перевершували сервери запечені в тканину об'єктів в нашому житті: те, що називають [[IoT|https://uk.wikipedia.org/wiki//Інтернет_речей]] або навіть ~IoE (//Internet of Everything//).
+
+На сьогодні рішенням такого &quot;безсерверного&quot; світу є ~TiddlyWiki. Зокрема, для тих, хто не має власного контрольованого серверу, або для тих, чиє єдине з'єднання з інтернетом є подорожня флешка.
+
+Звичайно, браузер це програма для перегляду HTML-сторінок, але це також найпродуктивніша, портативна персональна віртуальна машина (VM) з чудовою властивістю - кінцеві користувачі можуть бути самі собі провайдерами.
+
+Таким чином, ~TiddlyWiki це можливість ре-демократизації веба, це спосіб для створення користувацьких інтерактивних веб-додатків з невеликого числа простих компонентів, а також це універсальна ментальна модель для зберігання і багаторазового використання інформації.
+
+!! Джерело
+
+* [[J.Ruston. Serverlessness|http://tiddlywiki.com/talkytalky/#Serverlessness]]
+* [[Про Тідлівікі. Посібник для користування Тідлівікі 5+. ProTW|https://protw.github.io/tw5]]</pre>
 </div>
 <div created="20171204194513820" modified="20180828200934756" order="04" tags="[[Сумісна робота в проекті]]" title="Варіанти розгортання TW" topic="Проект" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>Варіанти розгортання TW залежать від таких ключових факторів:
@@ -12695,12 +12478,12 @@ kdgenm kropyvadoc
 # у полі ''Высота'' видаліть будь-яке значення і зніміть під ним галочку ''Относительно''
 # натисніть ''ОК''</pre>
 </div>
-<div created="20170109122149567" headingorder="100" icon="$:/boa/images/document-edit-outline.svg" list-before="$:/core/ui/SideBar/Open" modified="20200330182501613" tags="$:/tags/SideBar" title="Журнал" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<div created="20170109122149567" headingorder="100" icon="$:/boa/images/document-edit-outline.svg" list-before="$:/core/ui/SideBar/Open" modified="20200401122329460" tags="$:/tags/SideBar" title="Журнал" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>@@float:left;width:5%;margin-right:7px; [img [$:/boa/img/document-edit-outline.svg]]@@
- 
+
 !! Журнал &quot;Про Тідлівікі&quot;
 
-&lt;&lt;toc &quot;Журнал&quot; &quot;!is[image]&quot;&gt;&gt;</pre>
+&lt;&lt;toc &quot;Журнал&quot; &quot;!is[image]!sort[created]&quot;&gt;&gt;</pre>
 </div>
 <div created="20171120065137774" modified="20180828200045705" order="09" tags="[[Початок роботи]]" title="Загальна схема інфраструктури проекту" topic="Проект" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>&lt;&lt;image-center-caption &quot;protweco-project-infrastructure-UKR.svg&quot; 85%&gt;&gt;</pre>
@@ -13647,6 +13430,25 @@ type: image/png
 &lt;&lt;toc &quot;Посібник користувача Тідлівікі&quot; &quot;sort[headingorder]!is[image]&quot;&gt;&gt;
 &lt;!-- &lt;/div&gt; sort[headingorder]!is[image] --&gt;</pre>
 </div>
+<div created="20170102175418605" modified="20200401122136111" tags="Журнал" title="Початок" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<pre>Tiddlywiki це персональна вікі, розроблена Джеремі Растоном (Jeremy Ruston). Tiddlywiki написана на ~JavaScript і, за визначенням автора, є //нелінійним блокнотом для нотування, організації та поширення складної інформації//. Tiddlywiki це дуже інтерактивна програма і   надає безпрецедентну свободу людині для збереження цінної інформації під власним контролем. 
+
+Якщо зовсім стисло, то Tiddlywiki це самоплатформа для створення смислів. Або інакше - створення матеріалу для розміщення в інтернеті надає забагато задоволення для того, щоб залишити це розробникам.
+
+Однією, але не єдиною вражаючою рисою Tiddlywiki є те, що вся вікі включно з кодом зберігається в одному файлі і для роботи з нею достатньо лише браузера на локальному комп'ютері. Але це не єдиний спосіб запуску. Одним з альтернативних варіантів, що надає ще більшої гнучкості, це запуск Tiddlywiki під Node.js.
+
+Базова документація Tiddlywiki (англійською) розташована на [[tiddlywiki.com|http://tiddlywiki.com/]]. Також короткий дохідливий вступ-презентацію можна знайти [[тут|http://tiddlywiki.com/editions/introduction/]].
+
+!! УКРАЇНСЬКИЙ КОНТЕКСТ
+
+Дивним є те, що Tiddlywiki й досі практично не відома в українському сегменті вебу. Також серед більш ніж 20 перекладів її інтерфейсу український відсутній.
+
+Власне запуск ресурсу [[protw.github.io|https://protw.github.io]], а також супровідних груп для [[оголошень і анонсів|https://www.facebook.com/groups/protw5]] та для [[обговорень і дискусій|https://groups.io/g/protw]] має на меті поштовх і сприяння розвитку Tiddlywiki як платформи створення матеріалів у вебі на наших теренах.
+
+Для старту про ТВ ви можете прочитати українською і тут же опробувати її на ресурсі [[protw.github.io/tw5|https://protw.github.io/tw5/]]. 
+
+Згодом, за побажанням, ви зможете самостійно розміщати ваші матеріали на ресурсі [[protw.github.io|https://protw.github.io]]. Для цього з усіх пов'язаних питань звертайтеся до групи для обговорень і дискусій [[groups.io/g/protw|https://groups.io/g/protw]].</pre>
+</div>
 <div created="20171106202540046" modified="20180828195810877" order="010" tags="[[Робота з проектами PROTW]]" title="Початок роботи" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>&lt;&lt;ConfigurationWizard [[Початок роботи]]&gt;&gt;</pre>
 </div>
@@ -13860,6 +13662,20 @@ The class `ol` is defined in a custom stylesheet which you can simply drag to yo
 !!Посилання
 
 * [[Advanced Numbered Lists|http://tobibeer.github.io/tb5/#Advanced%20Numbered%20Lists]]</pre>
+</div>
+<div created="20170109115806181" modified="20200401122211682" tags="Журнал" title="Радіація: дози, ефекти, ризики" type="text/vnd.tiddlywiki" revision="0" bag="default">
+<pre>Публікація НКДАР ООН щодо дії іонізуючого випромінення на людину.
+
+Ця брошура вперше опублікована у 1985 році і в значній мірі ґрунтується на результатах наукового комітету ООН з дії атомної радіації, що є допоміжним органом Генеральної Асамблеї Організації Об'єднаних Націй. У публікації підсумовані достовірні знання про джерела радіації, її дії на людину і навколишнє середовище.
+
+Парадоксальним є те, що публікація не втратила своєї актуальності попри значні зміни, що відбулися у світі. Тому є декілька пояснень. Фундаментальні загальновизнані знання у сфері дії радіації на людину за минулі роки значно розширилися, але принципові закономірності залишилися непохитними.
+
+Не дивлячись на уроки Чорнобиля і Фукусіми, людство не відмовилось від використання радіації, а у певних галузях воно навіть поширюється (наприклад, томографія, певне відновлення програм атомної енергетики у ряді країн).
+
+!! Джерело:
+
+* [[Радіація: дози, ефекти, ризики. UNEP, 1985. Переклад: oleghbond, Опубліковано: protw, ukr, 16-12-2011|https://protw.github.io/rder-uk/]]
+</pre>
 </div>
 <div created="20161009145006422" creator="oleghbond" headingorder="060" modified="20170129221112271" modifier="oleghbond" tags="[[технічні питання]] Різне" title="Резервне копіювання" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>На поточному етапі потрібна найпростіший порядок збереження і відновлення, у разі потреби, інформації, що накопичується у ТВ.
@@ -14452,6 +14268,190 @@ CSS класи можуть бути додані до блоку цитати:
 !! Посилання
 * [[Форум ТВ|https://groups.google.com/forum/#!topic/TiddlyWiki/xFGvvbx8NZM]]
 </pre>
+</div>
+<div created="20200330170527969" modified="20200401122107796" tags="Журнал" title="Як визначити закінчення пандемії" revision="0" bag="default">
+<pre>!! ''ЯК ВИЗНАЧИТИ, НА ЯКІЙ ФАЗІ ПАНДЕМІЇ ПЕРЕБУВАЄ КРАЇНА''
+
+Користуючись відкритими даними ~CSSEGISandData/COVID-19 отримуємо щоденні дані з 22.1.2020 щодо підтверджених випадків (confirmed), померлих (deaths) і одужавших (recovered) для 177 адміністративних суб'єктів включно з двома круїзними суднами (MS Zaandam та Diamond Princess) і Ватиканом.
+
+Все населення $$P$$ будь-якої адміністративної одиниці розділено на дві частини: інфіковані $$I$$ і неінфіковані $$N$$:
+$$
+P = I + N
+$$
+Чисельність інфікованих $$I$$ невідома, але вона, окрім нвідомої частини (unknown) $$U$$, включає до себе відому частину, що називають підтвердженими випадками $$C$$ (confirmed):
+$$
+I = U + C
+$$
+Остання категорія $$C$$ поділяється на дві, теж відомі, частини: ті, які перебувають у стані хвороби (sick) $$S$$, і ті, які його пройшли (passed) $$P$$:
+$$
+C = S + P
+$$
+Зі стану хвороби є перехід лише у два стани: померлих (deaths) $$D$$ і одужавших (recovered) $$R$$. Тобто категорія $$P$$ складається з двох складових:
+$$
+P = D + R
+$$
+Зрештою всі захворілі $$S$$ перейдуть у два останніх стани $$D$$ і $$R$$. Саме момент, коли $$C = P, S = 0$$ (тобто хворих не залишилось), можна вважати, що пандемія позаду.
+
+В математичних термінах це можна виразити у відомих (виміряних) величинах як відношення $$\alpha$$ суми померлих і одужавших $$D + R$$ до підтверджених $$C$$. Досягнення цим відношенням 1 (або 100%) -- $$\alpha \implies 1$$ означатиме закінчення пандемії:
+$$
+\alpha = \frac{D + R}C \implies 1
+$$
+
+Безумовно залишаються питання до достовірності даних, але то вже інша історія.
+
+На представленому графіку станом на 29.03.2020 видно, що Китай найближче підійшов до виходу з пандемії (96.5%). Італія, попри всі негаразди, і Франція вийшли на рівень 25% і відстають від того рівня Китая на 5 тижнів.
+
+&lt;&lt;image-center covid-19.png 90%&gt;&gt;
+
+Поки зарано надавати остаточні прогнози, але ясно одне - такі країни як Україна і США лише на початку розвитку пандемічної хвилі зі своїм рівнем відношення у 3%.
+
+Слідкуйте за нашими оновленнями.
+
+!! Власне код
+
+Повний код Octave представлений нижче для вільного використання. Користуйтесь на здоров'я:
+
+```matlab
+# CODE FOR DETERMINATION OF THE PANDEMIC END
+# Author: Olegh Bondarenko, https://protw.github.io/oleghbond
+# Date: 2020-03-29
+function covid
+  # action == 1 - launches data update from the source and saves locally
+  # action == 0 - uses the last data set stored locally
+  action = 0;
+  if action
+    DATA = check_covid_data;
+    save data DATA
+  else
+    load data
+    load population
+  endif
+  confirmed = DATA.confirmed;
+  deaths = DATA.deaths;
+  recovered = DATA.recovered;
+  country = DATA.country;
+  days = DATA.days;
+  rep_date = DATA.date;
+  
+  flt = {'Ukraine' 'US' 'Italy' 'China' ...
+         'France' 'Germany'}; # 'Poland' 'Finland' 
+  [~,iflt,jflt]=intersect(country,flt);
+  # 'y_adjust' is of the same size and order as in 'flt'
+  # it used to adjust vertical position of label 'country'
+  y_adjust = [1.5 0.8 1.05 1 0.95 1]; 
+  
+  x = days-days(1);
+  y = (deaths(iflt,:)'+recovered(iflt,:)')./confirmed(iflt,:)'*100;
+  date_range_str = [datestr(days(1),29) ' - ' datestr(days(end),29)];
+
+  figure(1)
+  plot(x,y)
+  xlabel('confimed')
+  ylabel('(deaths+recovered)/confirmed')
+  title(['COVID-19: ' date_range_str])
+  legend(flt(jflt),'location','northwest')
+  #set(gca,'xscale','log')
+  grid on
+  text(x(end)*ones(1,size(y,2)),y(end,:).*y_adjust(jflt),flt(jflt))
+endfunction
+
+function DATA = check_covid_data
+  DAT = convert_struct;
+  i = 0;
+  for [d, label] = DAT
+    country_prov = {d.Dat.country};
+    country = unique(country_prov);
+    days = d.days;
+    dat = [];
+    for j = 1:length(d.Dat)
+      dat = [dat; d.Dat(j).dat];
+    endfor
+    dats = [];
+    for c = country
+      ind = strcmp(country_prov,c);
+      dats = [dats; sum(dat(ind,:),1)];
+    endfor
+    DATA.(label) = dats;
+    if !i++
+      DATA.country = country;
+      DATA.days = days;
+      label0 = label;
+    else
+      k = 1;
+      ident(k++) = identicsarr(DATA.country,country);
+      ident(k++) = identicnarr(DATA.days,days);
+      ident(k) = all(size(DATA.(label0)) == size(DATA.(label)));
+      if !all(ident)
+        printf('Data sets %s and %s are not identical!\n',label0,label)
+        printf('Ident values = %s\n',mat2str(ident))
+        error('PLEASE CHECK THE DATA!')
+      endif
+    endif
+  endfor
+  DATA.country = DATA.country';
+  DATA.date = datestr(now,31);
+endfunction
+
+function ident = identicnarr(narr1,narr2)
+  if all(size(narr1) == size(narr2)) &amp;&amp; all(narr1(:) == narr2(:))
+    ident = 1;
+  else
+    ident = 0;
+  endif
+endfunction
+
+function ident = identicsarr(sarr1,sarr2)
+  if all(size(sarr1) == size(sarr2)) &amp;&amp; all(strcmp(sarr1(:),sarr2(:)))
+    ident = 1;
+  else
+    ident = 0;
+  endif
+endfunction
+
+function DAT = convert_struct
+  data_src = get_data_src;
+  idat = 1;
+  for [web_address, label] = data_src
+    disp([label ' = ' web_address])
+    sdat = urlread(web_address);
+    sdat = strrep(sdat,'&quot;Korea, South&quot;','Korea South');
+    lines = strsplit(sdat,{'\r' '\n'});
+    head = strsplit(lines{1},',');
+    for i = 5:length(head)
+      mdy = str2num(strrep(head{i},'/',','));
+      days(i-4) = datenum(mdy(3)+2000,mdy(1),mdy(2));
+    endfor
+    DAT.(label).days = days;
+    for i = 2:length(lines)
+      if length(lines{i}) == 0, break, endif
+      dat = strsplit(lines{i},',');
+      i1 = i - 1;
+      Dat(i1).province = dat{1};
+      Dat(i1).country = dat{2};
+      Dat(i1).lat = str2num(dat{3});
+      Dat(i1).long = str2num(dat{4});
+      Dat(i1).dat = str2num(strjoin(dat(5:end),' '));
+    endfor
+    DAT.(label).Dat = Dat;
+  endfor
+endfunction
+
+function data_src = get_data_src
+  time_series_covid19_path = [...
+    'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/'...
+    'master/csse_covid_19_data/csse_covid_19_time_series/'];
+  time_series_covid19_confirmed_global = [time_series_covid19_path ...
+    'time_series_covid19_confirmed_global.csv'];
+  time_series_covid19_deaths_global = [time_series_covid19_path ...
+    'time_series_covid19_deaths_global.csv'];
+  time_series_covid19_recovered_global = [time_series_covid19_path ...
+    'time_series_covid19_recovered_global.csv'];
+    
+  data_src.confirmed = time_series_covid19_confirmed_global;
+  data_src.deaths = time_series_covid19_deaths_global;
+  data_src.recovered = time_series_covid19_recovered_global;
+endfunction
+```</pre>
 </div>
 <div created="20180327060657120" modified="20180828200934715" order="09" tags="[[Сумісна робота в проекті]]" title="Як додати інтерактивну SVG-схему" topic="Проект" type="text/vnd.tiddlywiki" revision="0" bag="default">
 <pre>Спочатку було поставлене питання щодо вставки інтерактивного SVG-зображення у TW5 (під управлінням бравзера Chrome). У даному випадку інтерактивність забезпечувалась підв'язуванням гіперлінків під окремі елементи зображення так, щоб при наведенні миші змінювався курсор миші і фоновий колір об'єкта.
