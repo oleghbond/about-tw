@@ -1,54 +1,113 @@
 created: 20200330170527969
-modified: 20200403100431168
+modified: 20200403131845668
 tags: Журнал
 title: Як визначити закінчення пандемії
+
+<div class="sh-multicol2">
 
 !! ''ЯК ВИЗНАЧИТИ, НА ЯКІЙ ФАЗІ ПАНДЕМІЇ ПЕРЕБУВАЄ КРАЇНА''
 
 Користуючись відкритими даними //~CSSEGISandData/COVID-19// отримуємо щоденні дані з 22.1.2020 щодо підтверджених випадків (//confirmed//), померлих (//deaths//) і одужавших (//recovered//) для 177 адміністративних суб'єктів включно з двома круїзними суднами (MS Zaandam та Diamond Princess) і Ватиканом. На основі отриманих даних будуємо параметр $$\alpha$$, що характеризує близкість виходу країни з пандемії - що ближче параметр $$\alpha$$ до 100%, то ближче країна наблизилась до виходу з пандемії:
 
+!! ''HOW TO DETERMINE WHAT PHASE OF THE PANDEMIC A COUNTRY IS AT''
+
+Using open data //~CSSEGISandData/COVID-19// we get daily data starting from 22.1.2020 on //confirmed// cases, //deaths// and //recovered// for 177 administrative entities including two cruise ships (MS Zaandam and Diamond Princess) and the Vatican. Based on the data obtained, we construct the parameter $$\alpha$$, which characterizes the proximity of the country exit from the pandemic - the closer the parameter $$\alpha$$ to 100%, the closer a country has approached the exit of the pandemic:
+</div>
+
 <<image-center covid-19.png 90%>>
+
+<div class="sh-multicol2">
 
 На представленому графіку станом на 29.03.2020 видно, що Китай найближче підійшов до виходу з пандемії (96.5%). Італія, попри всі негаразди, і Франція вийшли на рівень 25% і відстають від того рівня Китая на 5 тижнів.
 
-Поки зарано надавати остаточні прогнози, але ясно одне - такі країни як Україна і США станом на 29.03.2020 перебувають лише на початку розвитку пандемічної хвилі зі своїм рівнем відношення у 3%.
+Поки зарано надавати остаточні прогнози, але ясно одне - такі країни як Україна і США станом на 29.03.2020 перебувають лише на початку розвитку пандемічної хвилі зі своїм рівнем $$\alpha$$ у 3%.
 
 Слідкуйте за нашими щоденними оновленнями.
 
-!! ЯК ПОБУДОВАНО РОЗРАХУНОК
+The chart presented, as of March 29, 2020, shows that China came closest to the exit of the pandemic (96.5%). Italy, in spite of all the problems, and France have reached 25% and lag behind that level of China by 5 weeks.
 
-Все населення $$P$$ будь-якої адміністративної одиниці розділено на дві частини: інфіковані $$I$$ і неінфіковані $$N$$:
+It is too early to provide definitive forecasts, but one thing is clear - countries such as Ukraine and the United States as of March 29, 2020 are only at the beginning of a pandemic wave with their ratio $$\alpha$$ of 3%.
+
+Stay tuned for our daily updates.
+
+</div>
+
+<div class="sh-multicol2">
+
+!! ''ЯК ПОБУДОВАНО РОЗРАХУНОК''
+
+Все населення $$P$$ будь-якої адміністративної одиниці складається з двох частин: інфіковані $$I$$ і неінфіковані $$N$$:
+
+!! ''HOW THE CALCULATION IS BUILT''
+
+The entire population of $$P$$ of any administrative unit consists of two parts: infected $$I$$ and uninfected $$N$$:
+</div>
 $$
 P = I + N
 $$
+<div class="sh-multicol2">
+
 Чисельність інфікованих $$I$$ невідома, але вона, окрім нвідомої частини (//unknown//) $$U$$, включає до себе відому частину, що називають підтвердженими випадками $$C$$ (//confirmed//):
+
+The number of infected $$I$$ is unknown, but it, in addition to the //unknown// part $$U$$, includes the known part, called the //confirmed// cases $$C$$:
+</div>
 $$
 I = U + C
 $$
+<div class="sh-multicol2">
+
 Остання категорія $$C$$ поділяється на дві, теж відомі, частини: ті, які перебувають у стані хвороби (//sick//) $$S$$, і ті, які його пройшли (//closed//) $$L$$:
+
+The last category $$C$$ is divided into two, also known, parts: those who are in the  //sick// state $$S$$ and those who have passed it (//closed// cases) $$L$$:
+</div>
 $$
 C = S + L
 $$
+<div class="sh-multicol2">
+
 Зі стану хвороби є перехід лише у два стани: померлих (//deaths//) $$D$$ і одужавших (//recovered//) $$R$$. Тобто категорія $$L$$ складається з двох складових:
+
+From the //sick// state, there is the transfer into two states only: $$D$$ (//deaths//) and $$R$$ (//recovered//). That is, the category $$L$$ (//closed//) consists of two components:
+</div>
 $$
 L = D + R
 $$
+<div class="sh-multicol2">
+
 Підсумковий чисельний баланс всіх зазначених категорій населення має такий вигляд:
+
+The eventual numerical balance of all these categories of the population is as follows:
+</div>
 $$
 P = N + \overbrace{U+\overbrace{S+\overbrace{D+R}^{\text{closed }L}}^{\text{confirmed }C}}^{\text{infected }I}
 $$
+<div class="sh-multicol2">
+
 Зрештою всі захворілі $$S$$ перейдуть у два останніх стани $$D$$ і $$R$$. Саме момент, коли $$C = L, S = 0$$ (тобто хворих не залишилось), можна вважати, що пандемія позаду.
 
-В математичних термінах це можна виразити у відомих (виміряних) величинах як відношення $$\alpha$$ суми померлих і одужавших $$L = D + R$$ до підтверджених $$C$$. Досягнення цим відношенням 1 (або 100%) -- $$\alpha \implies 1$$ означатиме закінчення пандемії:
+В математичних термінах це можна виразити у відомих (виміряних) величинах як відношення $$\alpha$$ суми померлих і одужавших $$L = D + R$$ до підтверджених $$C$$. Досягнення цим відношенням 1 (або 100%) -- $$\alpha \rightarrow 1$$ означатиме закінчення пандемії:
+
+Eventually, all the sick cases $$S$$ will be closed and turned into the two states $$D$$ and $$R$$. It is the moment when $$C = L, S = 0$$ (that is, no patients left), we can assume that the pandemic is behind.
+
+In mathematical terms, this can be expressed in known (measured) quantities as the ratio $$\alpha$$ of sum of the //deaths// and the //recovered// $$L = D + R$$ to the //confirmed// $$C$$. Achieving this ratio of 1 (or 100%) - $$\alpha \rightarrow 1$$ means the end of the pandemic:
+</div>
 $$
-\alpha = \frac{D + R}C \implies 1
+\alpha = \frac{D + R}C \rightarrow 1
 $$
+<div class="sh-multicol2">
 
 Безумовно залишаються питання до достовірності даних, але то вже інша історія.
 
-!! ВЛАСНЕ КОД
+!! ''ВЛАСНЕ КОД''
 
 Повний код Octave представлений нижче для вільного використання. Користуйтесь на здоров'я:
+
+Certainly questions left about the accuracy of the data, but that is another story.
+
+!! ''ACTUALLY THE CODE''
+
+The complete Octave code is presented below for free use. Please use it for your health:
+</div>
 
 ```matlab
 # CODE FOR DETERMINATION OF THE PANDEMIC END
